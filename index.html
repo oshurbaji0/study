@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دراسة جدوى - BRAND X</title>
+    <!-- تضمين Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- تضمين مكتبة Chart.js للرسوم البيانية -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <!-- تضمين الخط العربي المناسب -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap');
+        
+        /* تعريف الألوان المخصصة (الهوية البصرية: الأزرق الداكن والذهبي) */
+        :root {
+            --color-dark-blue: #0A192F; /* كحلي داكن للخلفيات الرئيسية */
+            --color-gold: #FFD700; /* ذهبي لامع للتركيز */
+            --color-light-gray: #F0F4F8; /* أبيض مائل للرمادي للخلفيات الثانوية */
+            --color-accent-blue: #4682B4; /* أزرق فولاذي للعناصر الجمالية */
+            --color-text-light: #F8F8FF; /* نص فاتح للخلفيات الداكنة */
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--color-light-gray);
+            color: #1a202c;
+            line-height: 1.7;
+        }
+        
+        /* شريط التقدم */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background-color: var(--color-gold);
+            z-index: 9999;
+            box-shadow: 0 0 10px var(--color-gold);
+            transition: width 0.1s linear;
+        }
+
+        /* أنماط العناوين الرئيسية مع خط ذهبي وتظليل */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40%;
+            height: 5px;
+            background-color: var(--color-gold); 
+            border-radius: 9999px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); /* تأثير التوهج الذهبي */
+        }
+        .card {
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .card:hover {
+            transform: translateY(-10px); /* ارتفاع أكبر للتأثير */
+            box-shadow: 0 20px 50px rgba(10, 25, 47, 0.5);
+        }
+        .icon-box {
+            background-color: var(--color-gold);
+            color: var(--color-dark-blue);
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+            /* استخدام SVG داخل الأيقونة */
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        
+        /* الرسوم المتحركة عند التمرير (Scroll Animation) - أبطأ وأكثر سلاسة */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+        .animate-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* خلفية متدرجة للأقسام الداكنة */
+        .dark-section-bg {
+            background: linear-gradient(145deg, #0A192F, #102A43);
+        }
+        /* تأثير التظليل الذهبي على الأزرار */
+        .gold-button {
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6); /* زيادة التوهج */
+        }
+        
+        /* ------------------------------------------- */
+        /* تحسينات الموبايل (Mobile-First Optimization) */
+        /* ------------------------------------------- */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 3rem; /* 48px */
+            }
+            .hero-subtitle {
+                font-size: 1.25rem; /* 20px */
+            }
+            /* إخفاء شريط التنقل العلوي لصالح السفلي */
+            .main-nav {
+                display: none; 
+            }
+            /* تصغير حجم الخطوط في الأرقام الرئيسية */
+            .text-4xl {
+                font-size: 2rem;
+            }
+            /* تصغير حجم العناوين لتناسب الشاشة */
+            .text-3xl {
+                font-size: 1.5rem;
+            }
+             /* تعديل حجم الخط للجدول ليتناسب مع الهاتف */
+            .mobile-table-text {
+                font-size: 0.75rem; /* 12px */
+            }
+            .mobile-table-header {
+                font-size: 0.65rem; /* 10px */
+            }
+            
+            /* تعديل حجم زر الذهاب إلى المتجر ليناسب الهاتف */
+            .mobile-link-btn {
+                font-size: 1rem; /* تصغير الخط لـ 16px */
+                padding: 0.75rem 1.5rem; /* تقليل التباعد */
+            }
+
+            /* تحسين عرض الـ iframe على الهاتف */
+            .iframe-container {
+                padding-top: 75%; /* نسبة عرض 4:3 لتكون مرئية بشكل أفضل على الهاتف */
+            }
+            .iframe-mockup {
+                border: 8px solid var(--color-dark-blue); /* تقليل سمك الإطار */
+                border-radius: 1rem;
+            }
+        }
+
+        /* حاوية محاكاة عرض المنتج */
+        .iframe-container {
+            position: relative;
+            padding-top: 56.25%; /* نسبة 16:9 على الديسكتوب */
+            margin-bottom: 2rem; /* مسافة أسفل الإطار */
+        }
+        .iframe-mockup {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 1.5rem;
+            border: 15px solid var(--color-dark-blue);
+            box-shadow: 0 0 80px rgba(0,0,0,0.8); /* تظليل عميق */
+            transition: transform 0.3s;
+        }
+        .iframe-mockup:hover {
+            transform: scale(1.01);
+        }
+
+        /* شريط التنقل السفلي (يظهر على الموبايل فقط) */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 3px solid var(--color-gold);
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 640px) {
+            .bottom-nav {
+                display: flex;
+            }
+            /* تطبيق تباعد داخلي أقل للزر على الهاتف */
+             .mobile-link-btn {
+                padding: 0.75rem 1rem !important; /* تقليل التباعد الأفقي بشدة */
+                font-size: 1.1rem !important; /* حجم خط مقبول */
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800 pb-20 sm:pb-0">
+
+    <!-- شريط التقدم (Progress Bar) -->
+    <div id="progress-bar"></div>
+
+    <!-- شريط التنقل العلوي (يظهر على الديسكتوب فقط) -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-xl sticky top-0 z-50 border-b-4 main-nav" style="border-color: var(--color-gold);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <span class="text-4xl font-black tracking-wider" style="color: var(--color-dark-blue);">BRAND <span style="color: var(--color-gold);">X</span></span>
+                </div>
+                <div class="flex space-x-6 space-x-reverse font-extrabold text-lg nav-links">
+                    <a href="#executive-summary" class="text-gray-700 hover:text-blue-700 transition duration-150">الملخص</a>
+                    <a href="#product-vision" class="text-gray-700 hover:text-blue-700 transition duration-150">المنتج التجريبي</a>
+                    <a href="#market-study" class="text-gray-700 hover:text-blue-700 transition duration-150">السوق والتسعير</a>
+                    <a href="#financial-study" class="text-gray-700 hover:text-blue-700 transition duration-150">المالية</a>
+                    <a href="#swot-analysis" class="text-gray-700 hover:text-blue-700 transition duration-150">تحليل SWOT</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- شريط التنقل السفلي (يظهر على الموبايل فقط) -->
+    <div class="bottom-nav h-16 flex justify-around items-center">
+        <a href="#executive-summary" class="text-xs font-bold text-gray-700 flex flex-col items-center hover:text-blue-700 transition duration-150">
+            <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            الملخص
+        </a>
+        <a href="#product-vision" class="text-xs font-bold text-gray-700 flex flex-col items-center hover:text-blue-700 transition duration-150">
+            <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L12 21H3V3h18v12h-5.25L12 21H9.75zM12 21v-3.75"/></svg>
+            المنتج
+        </a>
+        <a href="#financial-study" class="text-xs font-bold text-gray-700 flex flex-col items-center hover:text-blue-700 transition duration-150">
+            <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+            المالية
+        </a>
+        <a href="#swot-analysis" class="text-xs font-bold text-gray-700 flex flex-col items-center hover:text-blue-700 transition duration-150">
+            <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            SWOT
+        </a>
+    </div>
+
+    <!-- القسم الأول: المقدمة التنفيذية (Executive Summary) -->
+    <section id="executive-summary" class="py-16 sm:py-24 dark-section-bg" style="color: var(--color-text-light);">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
+            <h1 class="hero-title text-5xl sm:text-7xl font-black mb-4 tracking-wider" style="color: var(--color-gold);">دراسة جدوى استثمارية</h1>
+            <p class="hero-subtitle text-xl sm:text-3xl mb-10 font-light" style="color: #A9B7C7;">**"BRAND X":** الجيل الجديد من الملابس المخصصة في السوق السوري.</p>
+            
+            <!-- لوحة إبراز الأرقام الرئيسية - تعود لعمود واحد على الهاتف -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12">
+                <div class="bg-gray-800/60 p-5 sm:p-6 rounded-xl shadow-2xl border-b-4 border-yellow-500">
+                    <p class="text-sm font-light text-gray-400">رأس المال الأولي الفوري</p>
+                    <p class="text-3xl sm:text-4xl font-extrabold mt-1" style="color: var(--color-gold);">$3,400</p>
+                </div>
+                <div class="bg-gray-800/60 p-5 sm:p-6 rounded-xl shadow-2xl border-b-4 border-yellow-500">
+                    <p class="text-sm font-light text-gray-400">التكاليف الشهرية الثابتة</p>
+                    <p class="text-3xl sm:text-4xl font-extrabold mt-1" style="color: var(--color-gold);">$800</p>
+                </div>
+                <div class="bg-gray-800/60 p-5 sm:p-6 rounded-xl shadow-2xl border-b-4 border-yellow-500">
+                    <p class="text-sm font-light text-gray-400">حالة الخطة</p>
+                    <p class="text-3xl sm:text-4xl font-extrabold mt-1" style="color: #38A169;">90% جاهز</p>
+                </div>
+            </div>
+
+            <div class="p-6 sm:p-10 rounded-2xl shadow-2xl" style="background-color: #102A43; border: 2px solid var(--color-accent-blue);">
+                <p class="text-lg sm:text-xl leading-loose font-medium" style="color: var(--color-text-light);">
+                    نقدم نموذج عمل ريادي يجمع بين **قوة الذكاء الاصطناعي (AI)** في التصميم و**الكفاءة الإنتاجية العالية** عبر شراكة استراتيجية. هذا المزيج يضعنا في موقع الريادة بعيداً عن المنافسة التقليدية، ويضمن الجودة الفائقة وسرعة الاستجابة لمتطلبات السوق.
+                    <br>
+                    <span class="font-extrabold" style="color: var(--color-gold);">القيمة المضافة:</span> إلغاء تكاليف المعدات، التحكم بالجودة، والاعتماد على التسويق المؤثر.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم: رؤية المنتج: المتجر التجريبي (MVP) -->
+    <section id="product-vision" class="py-16 sm:py-20 dark-section-bg" style="color: var(--color-text-light);">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-black section-title text-white animate-on-scroll" style="color: var(--color-gold);">رؤية المنتج: المتجر التجريبي (MVP)</h2>
+            <p class="text-xl mb-10 text-center font-light" style="color: #A9B7C7;">تحويل الدراسة إلى واقع: شاهد النسخة الأولية للمتجر واستكشف واجهة المستخدم.</p>
+
+            <div class="iframe-container animate-on-scroll" style="transition-delay: 0.2s;">
+                <!-- iFrame لعرض المتجر التجريبي -->
+                <iframe 
+                    src="https://brandx-lsj4hm.manus.space/" 
+                    class="iframe-mockup"
+                    title="BRAND X Prototype Store"
+                ></iframe>
+            </div>
+            
+            <p class="text-center text-sm font-bold mt-4 sm:hidden" style="color: var(--color-gold);">
+                لأفضل تجربة تفاعلية، يرجى الضغط على الرابط في الأسفل.
+            </p>
+
+            <div class="text-center mt-8 animate-on-scroll">
+                <a href="https://brandx-lsj4hm.manus.space/" target="_blank" 
+                   class="gold-button py-3 px-6 text-lg font-bold rounded-lg transition duration-300 transform hover:scale-105 mobile-link-btn sm:text-xl sm:px-10" 
+                   style="background-color: var(--color-gold); color: var(--color-dark-blue);">
+                    الذهاب إلى المتجر في نافذة جديدة ↗️
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- القسم الثاني: الدراسة التسويقية والتسعير (Market Study & Pricing) -->
+    <section id="market-study" class="py-16 sm:py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-black section-title text-gray-800 animate-on-scroll">1. استراتيجية السوق والتسعير التنافسي</h2>
+            
+            <!-- نقاط القوة التنافسية - تعود لعمود واحد على الهاتف -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-10">
+                <div class="card p-6 rounded-xl shadow-xl animate-on-scroll bg-white" style="transition-delay: 0.1s;">
+                    <div class="icon-box w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 text-2xl sm:text-3xl font-bold shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-dark-blue);">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l-2 3M9 19c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m6 18V6l2 3m-2 12c2.485 0 4.5-4.03 4.5-9s-2.015-9-4.5-9m-9 9h6m-9 0h6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--color-dark-blue);">الابتكار والريادة</h3>
+                    <p class="text-gray-600">أول من يقدم دمج AI لتصميم الأزياء بالكامل عبر منصة إلكترونية في المنطقة.</p>
+                </div>
+
+                <div class="card p-6 rounded-xl shadow-xl animate-on-scroll bg-white" style="transition-delay: 0.2s;">
+                    <div class="icon-box w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 text-2xl sm:text-3xl font-bold shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-dark-blue);">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.942 3.333.338 2.807 1.882a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.942 1.543-.338 3.333-1.882 2.807a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.942-3.333-.338-2.807-1.882a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.942-1.543.338-3.333 1.882-2.807a1.724 1.724 0 002.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--color-dark-blue);">كفاءة التشغيل</h3>
+                    <p class="text-gray-600">الشراكة مع المصنع تلغي تكاليف المعدات وتضمن جودة إنتاج متفوقة على المنافسين.</p>
+                </div>
+
+                <div class="card p-6 rounded-xl shadow-xl animate-on-scroll bg-white" style="transition-delay: 0.3s;">
+                    <div class="icon-box w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 text-2xl sm:text-3xl font-bold shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-dark-blue);">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--color-dark-blue);">التسويق المُدار</h3>
+                    <p class="text-gray-600">استراتيجية "براندات المشاهير" تضمن تسويقاً ضخماً، موثوقاً، وقائم على العمولة.</p>
+                </div>
+            </div>
+
+            <!-- استراتيجية التسعير الجديدة -->
+            <div class="mt-12 sm:mt-16 p-6 sm:p-8 rounded-xl shadow-2xl border-t-8 dark-section-bg" style="border-color: var(--color-gold);">
+                <h3 class="text-2xl sm:text-3xl font-extrabold mb-6" style="color: var(--color-gold);">هيكل التسعير متعدد المستويات</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-lg" style="color: var(--color-text-light);">
+                    <ul class="space-y-4">
+                        <li class="p-3 rounded-lg flex items-start" style="background-color: #102A43;">
+                            <span class="text-2xl mr-3" style="color: var(--color-gold);">⭐</span>
+                            <div>
+                                <strong class="text-lg sm:text-xl block">استعمال أدوات الذكاء الاصطناعي: مجاناً</strong>
+                                <span class="text-gray-400 text-sm">بوابة لجذب قاعدة مستخدمين واسعة وزيادة حركة المرور على الموقع.</span>
+                            </div>
+                        </li>
+                        <li class="p-3 rounded-lg flex items-start" style="background-color: #102A43;">
+                            <span class="text-2xl mr-3" style="color: var(--color-gold);">💸</span>
+                            <div>
+                                <strong class="text-lg sm:text-xl block">الطباعة عبر AI (تيشيرت/هودي): متوسطة التكلفة</strong>
+                                <span class="text-gray-400 text-sm">تسعير تنافسي يسمح بالانتشار ويستهدف الشريحة الأكبر من الشباب.</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="space-y-4">
+                        <li class="p-3 rounded-lg flex items-start" style="background-color: #102A43;">
+                            <span class="text-2xl mr-3" style="color: var(--color-gold);">💎</span>
+                            <div>
+                                <strong class="text-lg sm:text-xl block">خدمة تصميم الملابس والتفصيل: مرتفعة</strong>
+                                <span class="text-gray-400 text-sm">تستهدف هوامش ربح عالية، وتستغل ميزة الريادة في تقديم هذه الخدمة الحصرية.</span>
+                            </div>
+                        </li>
+                        <li class="p-3 rounded-lg flex items-start" style="background-color: #102A43;">
+                            <span class="text-2xl mr-3" style="color: var(--color-gold);">👑</span>
+                            <div>
+                                <strong class="text-lg sm:text-xl block">الشراء من براندات المشاهير: مرتفعة نسبياً</strong>
+                                <span class="text-gray-400 text-sm">يتم تسعيرها لتغطية نسبة عمولة المؤثر، مع الاستفادة من قوة العلامة الشخصية.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+             <!-- اقتراحات التشغيل -->
+            <div class="mt-12 sm:mt-16 animate-on-scroll">
+                <h3 class="text-2xl sm:text-3xl font-black mb-4 border-b-2 pb-2" style="color: var(--color-dark-blue); border-color: var(--color-accent-blue);">التحكم التشغيلي والجودة</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-lg">
+                    <div class="p-6 rounded-lg shadow-xl bg-white border-l-4" style="border-color: var(--color-accent-blue);">
+                        <h4 class="font-extrabold mb-2 text-xl text-gray-800">بروتوكول الشراكة والجودة (SLA)</h4>
+                        <p class="text-gray-600">يجب وضع **اتفاقية مستوى خدمة (SLA)** صارمة مع المصنع لتحديد مهلة التنفيذ القصوى، معايير الجودة، وإجراءات التعويض عن أي تأخير أو عيوب. ضمان جودة ثابتة هو مفتاح الثقة الإلكترونية.</p>
+                    </div>
+                    <div class="p-6 rounded-lg shadow-xl bg-white border-l-4" style="border-color: var(--color-accent-blue);">
+                        <h4 class="font-extrabold mb-2 text-xl text-gray-800">التغليف الفاخر وتجربة العميل</h4>
+                        <p class="text-gray-600">استخدام **تغليف "اللحظة"** (Moment Packaging) الفاخر (صندوق كحلي، بطاقة ضمان، رسالة شكر) لتحويل عملية الاستلام إلى "تجربة فتح صندوق" تُشارك على وسائل التواصل الاجتماعي.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- القسم الثالث: الدراسة المالية (Financial Study) - الرسوم البيانية -->
+    <section id="financial-study" class="py-16 sm:py-20 dark-section-bg" style="color: var(--color-text-light);">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-black section-title text-white animate-on-scroll" style="color: var(--color-gold);">2. المخطط المالي الأولي ($USD)</h2>
+            <p class="text-lg sm:text-xl mb-8 font-light" style="color: #A9B7C7;">تقديرات مبدئية لهيكل التكاليف المطلوبة للانطلاق، مع مراعاة التحديثات الأخيرة.</p>
+
+            <!-- الرسوم البيانية - تعود لعمود واحد على الهاتف -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12">
+                
+                <!-- الرسم البياني 1: التكاليف الأولية (مرة واحدة) -->
+                <div class="animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl" style="background-color: #102A43; border: 1px solid var(--color-accent-blue);">
+                        <h3 class="text-xl font-bold mb-4 text-center" style="color: var(--color-gold);">التكاليف الرأسمالية (مرة واحدة)</h3>
+                        <canvas id="startupChart"></canvas>
+                        <div class="mt-6 text-xl sm:text-2xl font-black text-center" style="color: var(--color-text-light);">الإجمالي الفوري للبدء: **$3400**</div>
+                    </div>
+                </div>
+
+                <!-- الرسم البياني 2: التكاليف التشغيلية (شهرية) -->
+                <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl" style="background-color: #102A43; border: 1px solid var(--color-accent-blue);">
+                        <h3 class="text-xl font-bold mb-4 text-center" style="color: var(--color-gold);">التكاليف التشغيلية الشهرية (الحد الأدنى)</h3>
+                        <canvas id="monthlyChart"></canvas>
+                        <div class="mt-6 text-xl sm:text-2xl font-black text-center" style="color: var(--color-text-light);">الإجمالي الشهري الثابت: **$800**</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة سيناريوهات النمو -->
+            <div class="mt-12 sm:mt-16 animate-on-scroll">
+                <h3 class="text-2xl sm:text-3xl font-extrabold mb-6 border-b pb-2" style="color: var(--color-gold); border-color: var(--color-accent-blue);">سيناريوهات النمو للسنة الأولى (مثال تقديري)</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-white rounded-lg shadow-xl" style="background-color: #102A43;">
+                        <thead>
+                            <tr class="mobile-table-header text-sm uppercase tracking-wider" style="color: var(--color-gold); background-color: #1a3a5a;">
+                                <th class="p-4">السيناريو</th>
+                                <th class="p-4">مبيعات متوقعة</th>
+                                <th class="p-4">الربحية</th>
+                                <th class="p-4">التعادل</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y" style="border-color: #1a3a5a;">
+                            <tr class="hover:bg-gray-700 transition duration-150">
+                                <td class="p-4 mobile-table-text font-bold text-center">المحافظ</td>
+                                <td class="p-4 mobile-table-text text-center">سيحدد لاحقاً</td>
+                                <td class="p-4 mobile-table-text text-center text-red-400">0%</td>
+                                <td class="p-4 mobile-table-text text-center text-red-400">الربع الأول</td>
+                            </tr>
+                            <tr class="hover:bg-gray-700 transition duration-150">
+                                <td class="p-4 mobile-table-text font-bold text-center">المتوقع</td>
+                                <td class="p-4 mobile-table-text text-center">سيحدد لاحقاً</td>
+                                <td class="p-4 mobile-table-text text-center text-yellow-400">15% - 25%</td>
+                                <td class="p-4 mobile-table-text text-center text-yellow-400">الربع الثاني</td>
+                            </tr>
+                            <tr class="hover:bg-gray-700 transition duration-150">
+                                <td class="p-4 mobile-table-text font-bold text-center">المتفائل</td>
+                                <td class="p-4 mobile-table-text text-center">سيحدد لاحقاً</td>
+                                <td class="p-4 mobile-table-text text-center text-green-400">30% - 40%</td>
+                                <td class="p-4 mobile-table-text text-center text-green-400">بداية الربع الثاني</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- لوحة التكاليف التفصيلية -->
+            <div class="mt-12 sm:mt-16 animate-on-scroll">
+                <h3 class="text-2xl sm:text-3xl font-extrabold mb-6 border-b pb-2" style="color: var(--color-gold); border-color: var(--color-accent-blue);">تفاصيل النفقات الأساسية (محدثة)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-lg">
+                    <div class="p-6 rounded-lg shadow-xl" style="background-color: #102A43; border: 1px solid var(--color-gold);">
+                        <h4 class="font-bold mb-3" style="color: var(--color-gold);">تكاليف البدء الأولية (الفورية)</h4>
+                        <ul class="space-y-3" style="color: #cccccc;">
+                            <li>💻 تطوير الموقع الأولي: $800</li>
+                            <li>📢 التسويق والتصوير الأولي: $600</li>
+                            <li>💰 رأس المال التشغيلي (يشمل رواتب الشهر الأول لـ 4 موظفين): **$2000**</li>
+                            <li class="font-extrabold border-t pt-3 mt-3" style="color: var(--color-gold);">الإجمالي الفوري: **$3400**</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 rounded-lg shadow-xl" style="background-color: #102A43; border: 1px solid var(--color-gold);">
+                        <h4 class="font-bold mb-3" style="color: var(--color-gold);">التكاليف التشغيلية الشهرية (الحد الأدنى)</h4>
+                        <ul class="space-y-3" style="color: #cccccc;">
+                            <li>👥 أجور الموظفين (4 موظفين): **$400**</li>
+                            <li>🤖 اشتراك AI (الأساسي): $120</li>
+                            <li>🖥️ تكاليف مكتبية (إنترنت ومستلزمات): $80</li>
+                            <li>📈 تكاليف التسويق الشهري الثابتة: $200</li>
+                            <li>🌐 الموقع والاستضافة (تبدأ بعد 6 أشهر): **$120**</li>
+                            <li class="font-extrabold border-t pt-3 mt-3" style="color: var(--color-gold);">الإجمالي الشهري الثابت: **$800**</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- القسم الرابع: تحليل SWOT -->
+    <section id="swot-analysis" class="py-16 sm:py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-black section-title text-gray-800 animate-on-scroll">3. تحليل SWOT الاستراتيجي</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
+                
+                <!-- نقاط القوة والفرص - تعود لعمود واحد على الهاتف -->
+                <div class="space-y-6 sm:space-y-8">
+                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl card animate-on-scroll bg-green-50 border-2 border-green-300" style="transition-delay: 0.1s;">
+                        <h3 class="text-xl sm:text-2xl font-extrabold mb-3" style="color: #14532D;">💪 نقاط القوة (Strengths)</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                            <li>**شراكة المصنع:** إلغاء تكاليف المعدات ورأس المال الضخم.</li>
+                            <li>**الريادة التكنولوجية:** نموذج عمل (AI + تفصيل) هو الأول محلياً.</li>
+                            <li>**كفاءة التكاليف:** هيكل مالي مُحسن برأس مال أولي منخفض ($3400).</li>
+                            <li>**التسويق الذكي:** تسويق مجاني وضخم عبر المشاهير.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl card animate-on-scroll bg-blue-50 border-2 border-blue-300" style="transition-delay: 0.3s;">
+                        <h3 class="text-xl sm:text-2xl font-extrabold mb-3" style="color: #1E40AF;">✨ الفرص (Opportunities)</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                            <li>سوق رقمي غير مشبع بالخدمات المتكاملة.</li>
+                            <li>انفتاح آفاق الدفع الإلكتروني وتحسن الأوضاع الأمنية.</li>
+                            <li>إمكانية التوسع الأفقي في منتجات الطباعة المختلفة.</li>
+                            <li>استهداف قطاع الشركات لطلبات الملابس الموحدة (B2B).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- نقاط الضعف والتهديدات - تعود لعمود واحد على الهاتف -->
+                <div class="space-y-6 sm:space-y-8">
+                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl card animate-on-scroll bg-yellow-50 border-2 border-yellow-300" style="transition-delay: 0.2s;">
+                        <h3 class="text-xl sm:text-2xl font-extrabold mb-3" style="color: #92400E;">⚠️ نقاط الضعف (Weaknesses)</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                            <li>الاعتماد الكلي على موثوقية الشريك (المصنع) في الإنتاج.</li>
+                            <li>صعوبة بناء الثقة الأولية في منصة جديدة عبر الإنترنت.</li>
+                            <li>تحدي إدارة 4 موظفين في المرحلة الأولية.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl card animate-on-scroll bg-red-50 border-2 border-red-300" style="transition-delay: 0.4s;">
+                        <h3 class="text-xl sm:text-2xl font-extrabold mb-3" style="color: #991B1B;">🔥 التهديدات (Threats)</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                            <li>منافسة المتاجر التقليدية القائمة على ثقة العميل بالمنتج الملموس.</li>
+                            <li>تقلبات سعر الصرف وتأثيرها على تكاليف التشغيل.</li>
+                            <li>احتمالية تقليد نموذج العمل من قبل منافسين بعد إثبات النجاح.</li>
+                            <li>التحديات اللوجستية المستمرة في الشحن الداخلي.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- القسم الخامس: الخلاصة والتوصيات (Conclusion) -->
+    <section id="conclusion" class="py-16 sm:py-24" style="background-color: var(--color-accent-blue);">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
+            <h2 class="text-4xl sm:text-5xl font-black mb-6" style="color: var(--color-gold);">الخلاصة والتوصية النهائية</h2>
+            <p class="text-xl sm:text-2xl mb-8 font-light" style="color: var(--color-text-light);">فرصة استثمارية واضحة ومُحكمة في سوق التكنولوجيا والملابس.</p>
+            
+            <div class="p-8 sm:p-10 rounded-2xl shadow-2xl bg-white" style="border-bottom: 5px solid var(--color-gold);">
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-700 font-medium">
+                    مشروع **BRAND X** يمثل استثماراً آمناً ونموذجاً مستداماً بفضل هيكله المالي المقتصد واستراتيجياته التسويقية الذكية. نحن على استعداد تام للانطلاق فوراً بعد تحديد الأرقام النهائية لتكلفة المنتج المباع (COGS) لإنهاء تحليل نقطة التعادل.
+                </p>
+                <p class="text-2xl sm:text-3xl font-extrabold mt-6" style="color: var(--color-dark-blue);">
+                    **الخطوة التالية:** تأكيد التكاليف والانطلاق.
+                </p>
+                <button class="mt-8 font-extrabold py-3 sm:py-4 px-8 sm:px-10 rounded-full shadow-2xl gold-button transition duration-300 transform hover:scale-105 text-lg sm:text-xl" style="background-color: var(--color-gold); color: var(--color-dark-blue);">
+                    نحن جاهزون للاجتماع النهائي
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- JavaScript للرسوم البيانية والحركات -->
+    <script>
+        // دالة عرض الرسوم البيانية (Chart.js)
+        function renderCharts() {
+            // الألوان المخصصة للرسوم البيانية
+            const primaryColor = '#FFD700'; // Gold
+            const secondaryColor = '#4682B4'; // Accent Blue
+            const tertiaryColor = '#0A192F'; // Dark Blue
+
+            // بيانات التكاليف الأولية (مرة واحدة)
+            const startupData = {
+                labels: ['تطوير الموقع', 'التسويق الأولي', 'رأس المال التشغيلي'],
+                datasets: [{
+                    label: 'التكلفة بالدولار الأمريكي ($)',
+                    data: [800, 600, 2000],
+                    backgroundColor: [primaryColor, secondaryColor, tertiaryColor],
+                    hoverOffset: 4
+                }]
+            };
+
+            // بيانات التكاليف التشغيلية (شهرية)
+            const monthlyData = {
+                labels: ['أجور الموظفين', 'اشتراك AI', 'تكاليف مكتبية', 'تسويق شهري'],
+                datasets: [{
+                    label: 'التكلفة الشهرية بالدولار الأمريكي ($)',
+                    data: [400, 120, 80, 200],
+                    backgroundColor: [primaryColor, secondaryColor, tertiaryColor, '#A9B7C7'],
+                    hoverOffset: 4
+                }]
+            };
+
+            // خيارات الرسوم البيانية
+            const options = {
+                responsive: true,
+                maintainAspectRatio: true, 
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: { family: 'Cairo' },
+                            color: 'white' 
+                        }
+                    },
+                    tooltip: {
+                        titleFont: { family: 'Cairo' },
+                        bodyFont: { family: 'Cairo' }
+                    }
+                }
+            };
+
+            // رسم بياني دائري للتكاليف الأولية
+            new Chart(document.getElementById('startupChart'), {
+                type: 'doughnut',
+                data: startupData,
+                options: options
+            });
+
+            // رسم بياني شريطي للتكاليف التشغيلية
+            new Chart(document.getElementById('monthlyChart'), {
+                type: 'bar',
+                data: monthlyData,
+                options: {
+                    ...options,
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.15)' },
+                            ticks: { color: '#F8F8FF' }
+                        },
+                        x: { 
+                            ticks: { 
+                                font: { family: 'Cairo' },
+                                color: '#F8F8FF'
+                            },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // دالة مراقبة التمرير للحركات وشريط التقدم
+        function checkScroll() {
+            // 1. الحركات التفاعلية (Animation)
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                // إذا كان العنصر ضمن مجال الرؤية
+                if (rect.top < window.innerHeight - 100 && rect.bottom > 100) {
+                    el.classList.add('in-view');
+                } else {
+                    el.classList.remove('in-view');
+                }
+            });
+
+            // 2. شريط التقدم (Progress Bar)
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        }
+
+        // تشغيل الرسوم البيانية والحركات عند تحميل الصفحة
+        window.onload = function() {
+            renderCharts();
+            checkScroll(); // تشغيل أولي
+            window.addEventListener('scroll', checkScroll); // مراقبة التمرير
+        };
+    </script>
+</body>
+</html>

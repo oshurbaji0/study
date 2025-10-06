@@ -4,49 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دراسة جدوى - BRAND X</title>
-    <!-- تضمين Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <!-- تضمين مكتبة Chart.js للرسوم البيانية -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-    <!-- تضمين الخط العربي المناسب -->
+    
+    <!-- الأنماط المدمجة والمحسنة لضمان عمل التصميم والفخامة محلياً -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap');
-        
         /* تعريف الألوان المخصصة (الهوية البصرية: الأزرق الداكن والذهبي) */
         :root {
-            --color-dark-blue: #0A192F; /* كحلي داكن للخلفيات الرئيسية */
-            --color-gold: #FFD700; /* ذهبي لامع للتركيز */
-            --color-light-gray: #F0F4F8; /* أبيض مائل للرمادي للخلفيات الثانوية */
-            --color-accent-blue: #4682B4; /* أزرق فولاذي للعناصر الجمالية */
-            --color-text-light: #F8F8FF; /* نص فاتح للخلفيات الداكنة */
+            --color-deep-navy: #0D1C2E; 
+            --color-dark-blue: #0A192F; 
+            --color-mid-navy: #1B3A5A; 
+            --color-gold: #FFD700; 
+            --color-accent-blue: #4682B4; 
+            --color-text-light: #F8F8FF; 
+            --shadow-deep: 0 30px 100px rgba(0, 0, 0, 0.98); /* ظل أعمق وأكثر درامية */
+            --shadow-gold: 0 0 80px rgba(255, 215, 0, 0.9); /* توهج نيون قوي */
+            --transition-speed: 0.3s;
         }
+
+        /* استيراد الخطوط الجديدة */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Montserrat:wght@800;900&display=swap');
 
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--color-light-gray);
-            color: #1a202c;
+            font-family: 'Cairo', Tahoma, sans-serif; 
+            background-color: var(--color-deep-navy);
+            color: var(--color-text-light); 
             line-height: 1.7;
-        }
-        
-        /* شريط التقدم */
-        #progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 5px;
-            background-color: var(--color-gold);
-            z-index: 9999;
-            box-shadow: 0 0 10px var(--color-gold);
-            transition: width 0.1s linear;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            /* إضافة نسيج خفيف للخلفية لتعزيز العمق */
+            background-image: radial-gradient(at 0% 0%, rgba(70, 130, 180, 0.1) 0%, transparent 50%),
+                              radial-gradient(at 100% 100%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
         }
 
-        /* أنماط العناوين الرئيسية مع خط ذهبي وتظليل */
+        /* دمج أنماط Tailwind الأساسية يدوياً */
+        .flex { display: flex; }
+        .justify-between { justify-content: space-between; }
+        .items-center { align-items: center; }
+        .p-6 { padding: 1.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .shadow-2xl { box-shadow: var(--shadow-deep); } 
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .gap-6 { gap: 1.5rem; }
+        .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+        .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+
+        /* ====== تحسينات التصميم الفاخرة ====== */
+        
+        .dark-section-bg {
+            background: var(--color-dark-blue);
+            position: relative;
+            z-index: 10;
+            padding-bottom: 4rem; 
+        }
+        .mid-section-bg {
+            background-color: var(--color-deep-navy);
+            padding-top: 4rem;
+            padding-bottom: 8rem;
+        }
+        
+        /* شريط التنقل العلوي (تأثير الزجاج المُعتّم) */
+        .sticky-nav {
+            background-color: rgba(13, 28, 46, 0.95); 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
+            border-bottom: 4px solid var(--color-gold);
+        }
+
+        /* لوحات الأرقام الرئيسية الجديدة */
+        .key-metric-box {
+            background-color: var(--color-dark-blue); 
+            border-top: 5px solid var(--color-gold); 
+            border-radius: 0.75rem;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), 0 15px 30px rgba(0, 0, 0, 0.9); /* توهج و ظل عميق */
+            transition: all var(--transition-speed);
+        }
+        .key-metric-box:hover {
+            transform: translateY(-12px) scale(1.03); 
+            box-shadow: var(--shadow-deep), var(--shadow-gold);
+        }
+        .key-metric-box p:last-child {
+             text-shadow: 0 0 25px rgba(255, 215, 0, 1); /* توهج نيون قوي للأرقام */
+             font-family: 'Montserrat', sans-serif;
+             letter-spacing: 0.1em;
+        }
+
+        /* العناوين والتظليل الذهبي - الخط الأقوى */
         .section-title {
             position: relative;
             display: inline-block;
             padding-bottom: 0.75rem;
             margin-bottom: 2.5rem;
+            font-weight: 900;
+            color: var(--color-gold);
+            text-shadow: 0 0 18px rgba(255, 215, 0, 0.8); /* نيون جولدن */
+            font-family: 'Montserrat', 'Cairo', sans-serif;
+            letter-spacing: 0.05em;
         }
         .section-title::after {
             content: '';
@@ -57,331 +112,461 @@
             height: 5px;
             background-color: var(--color-gold); 
             border-radius: 9999px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); /* تأثير التوهج الذهبي */
-        }
-        .card {
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-        .card:hover {
-            transform: translateY(-10px); /* ارتفاع أكبر للتأثير */
-            box-shadow: 0 20px 50px rgba(10, 25, 47, 0.5);
-        }
-        .icon-box {
-            background-color: var(--color-gold);
-            color: var(--color-dark-blue);
-            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
-            /* استخدام SVG داخل الأيقونة */
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center;
+            box-shadow: var(--shadow-gold);
         }
         
-        /* الرسوم المتحركة عند التمرير (Scroll Animation) - أبطأ وأكثر سلاسة */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        /* تحسين بطاقات المحتوى لتتناسب مع الخلفية الداكنة */
+        .content-card {
+            background-color: var(--color-dark-blue); 
+            color: var(--color-text-light);
+            border: 2px solid var(--color-accent-blue);
+            transition: all var(--transition-speed);
         }
-        .animate-on-scroll.in-view {
-            opacity: 1;
-            transform: translateY(0);
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 10px var(--color-accent-blue);
         }
 
-        /* خلفية متدرجة للأقسام الداكنة */
-        .dark-section-bg {
-            background: linear-gradient(145deg, #0A192F, #102A43);
+        /* تصميم بطاقات الفريق - تحديث ليكون أكثر رسمية */
+        .team-card {
+            background-color: var(--color-dark-blue); 
+            color: var(--color-text-light);
+            border-radius: 0.75rem; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+            transition: transform var(--transition-speed);
+            border-bottom: 5px solid var(--color-gold);
+            padding: 1rem;
         }
-        /* تأثير التظليل الذهبي على الأزرار */
-        .gold-button {
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6); /* زيادة التوهج */
+        .team-card h4 {
+             font-family: 'Montserrat', sans-serif;
+             letter-spacing: 0.03em;
         }
-        
-        /* ------------------------------------------- */
-        /* تحسينات الموبايل (Mobile-First Optimization) */
-        /* ------------------------------------------- */
+
+        /* تحسين بطاقات SWOT - نيون الحدود */
+        .swot-card {
+            transition: all var(--transition-speed);
+            background-color: var(--color-dark-blue);
+            color: var(--color-text-light);
+            border: 2px solid transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+            border-radius: 1.5rem; /* زوايا أكثر استدارة للرقي */
+        }
+        /* تطبيق ألوان SWOT على الحدود فقط */
+        .swot-strength { border-color: #68D391 !important; box-shadow: 0 0 20px #68D391; }
+        .swot-opportunity { border-color: #4682B4 !important; box-shadow: 0 0 20px #4682B4; }
+        .swot-weakness { border-color: #FFD700 !important; box-shadow: 0 0 20px #FFD700; }
+        .swot-threat { border-color: #991B1B !important; box-shadow: 0 0 20px #991B1B; }
+
+        .swot-card h3 {
+             color: var(--color-gold) !important;
+             text-shadow: none;
+             font-family: 'Montserrat', sans-serif;
+        }
+
+        /* ================================================= */
+        /* === MOBILE RESPONSIVENESS AND TABLE FIXES (NEW) === */
+        /* ================================================= */
+
+        /* إخفاء شريط التنقل العلوي على الهاتف */
         @media (max-width: 640px) {
-            .hero-title {
-                font-size: 3rem; /* 48px */
-            }
-            .hero-subtitle {
-                font-size: 1.25rem; /* 20px */
-            }
-            /* إخفاء شريط التنقل العلوي لصالح السفلي */
-            .main-nav {
-                display: none; 
-            }
-            /* تصغير حجم الخطوط في الأرقام الرئيسية */
-            .text-4xl {
-                font-size: 2rem;
-            }
-            /* تصغير حجم العناوين لتناسب الشاشة */
-            .text-3xl {
-                font-size: 1.5rem;
-            }
-             /* تعديل حجم الخط للجدول ليتناسب مع الهاتف */
-            .mobile-table-text {
-                font-size: 0.75rem; /* 12px */
-            }
-            .mobile-table-header {
-                font-size: 0.65rem; /* 10px */
-            }
-            
-            /* تعديل حجم زر الذهاب إلى المتجر ليناسب الهاتف */
-            .mobile-link-btn {
-                font-size: 1rem; /* تصغير الخط لـ 16px */
-                padding: 0.75rem 1.5rem; /* تقليل التباعد */
-            }
+             .main-nav { display: none !important; }
+             .bottom-nav { display: flex !important; }
+             body { padding-bottom: 5rem; }
+             
+             /* تصغير حجم العناوين ليتناسب مع الهاتف */
+             h1 { font-size: 2.5rem !important; }
+             h2 { font-size: 1.75rem !important; }
+             h3 { font-size: 1.25rem !important; }
+             .section-title { margin-bottom: 1.5rem !important; }
 
-            /* تحسين عرض الـ iframe على الهاتف */
-            .iframe-container {
-                padding-top: 75%; /* نسبة عرض 4:3 لتكون مرئية بشكل أفضل على الهاتف */
-            }
-            .iframe-mockup {
-                border: 8px solid var(--color-dark-blue); /* تقليل سمك الإطار */
-                border-radius: 1rem;
-            }
-        }
+             /* تعديل تباعد الأقسام */
+             .py-16 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+             .py-24 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 
-        /* حاوية محاكاة عرض المنتج */
-        .iframe-container {
-            position: relative;
-            padding-top: 56.25%; /* نسبة 16:9 على الديسكتوب */
-            margin-bottom: 2rem; /* مسافة أسفل الإطار */
-        }
-        .iframe-mockup {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 1.5rem;
-            border: 15px solid var(--color-dark-blue);
-            box-shadow: 0 0 80px rgba(0,0,0,0.8); /* تظليل عميق */
-            transition: transform 0.3s;
-        }
-        .iframe-mockup:hover {
-            transform: scale(1.01);
-        }
+             /* تحسين تخطيط الشبكات لعمود واحد */
+             .grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+             .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+             
+             /* لوحة الأرقام الرئيسية عمود واحد */
+             .key-metric-box p:last-child { font-size: 2rem !important; }
 
-        /* شريط التنقل السفلي (يظهر على الموبايل فقط) */
-        .bottom-nav {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 50;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 3px solid var(--color-gold);
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-        }
-        @media (max-width: 640px) {
-            .bottom-nav {
-                display: flex;
-            }
-            /* تطبيق تباعد داخلي أقل للزر على الهاتف */
-             .mobile-link-btn {
-                padding: 0.75rem 1rem !important; /* تقليل التباعد الأفقي بشدة */
-                font-size: 1.1rem !important; /* حجم خط مقبول */
-            }
+             /* تحسين جداول المحتوى (COGS, KPIs, Cash Flow) */
+             .table-container { 
+                 overflow-x: auto; /* تمكين التمرير الأفقي للجداول الطويلة */
+                 -webkit-overflow-scrolling: touch; /* تحسين التمرير على iOS */
+             }
+             
+             /* ضمان حجم الخط المناسب داخل الجداول على الهاتف */
+             .table-container table { 
+                 font-size: 0.7rem; /* خط أصغر ليتسع المحتوى */
+                 min-width: 600px; /* ضمان الحجم الأدنى لتمكين التمرير */
+             }
+             .table-container th, .table-container td {
+                 padding: 0.5rem !important; /* تقليل التباعد الداخلي */
+             }
+             
+             /* ضمان عرض الفريق و Milestones في عمود واحد */
+             #team-structure .grid-cols-4 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+             #milestones .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
         }
     </style>
 </head>
-<body class="text-gray-800 pb-20 sm:pb-0">
+<body style="min-height: 100vh;">
 
     <!-- شريط التقدم (Progress Bar) -->
     <div id="progress-bar"></div>
 
-    <!-- شريط التنقل العلوي (يظهر على الديسكتوب فقط) -->
-    <nav class="bg-white/95 backdrop-blur-sm shadow-xl sticky top-0 z-50 border-b-4 main-nav" style="border-color: var(--color-gold);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+    <!-- شريط التنقل العلوي (المحسن) -->
+    <nav class="sticky top-0 z-50 border-b-4 sticky-nav" style="border-color: var(--color-gold);">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <div class="flex justify-between items-center" style="height: 5rem;">
                 <div class="flex items-center">
-                    <span class="text-4xl font-black tracking-wider" style="color: var(--color-dark-blue);">BRAND <span style="color: var(--color-gold);">X</span></span>
+                    <span style="font-size: 2.5rem; font-weight: 900; letter-spacing: 0.05em; color: var(--color-text-light); font-family: 'Montserrat', sans-serif;">BRAND <span style="color: var(--color-gold);">X</span></span>
                 </div>
-                <div class="flex space-x-6 space-x-reverse font-extrabold text-lg nav-links">
-                    <a href="#executive-summary" class="text-gray-700 hover:text-blue-700 transition duration-150">الملخص</a>
-                    <a href="#product-vision" class="text-gray-700 hover:text-blue-700 transition duration-150">المنتج التجريبي</a>
-                    <a href="#market-study" class="text-gray-700 hover:text-blue-700 transition duration-150">السوق والتسعير</a>
-                    <a href="#financial-study" class="text-gray-700 hover:text-blue-700 transition duration-150">المالية</a>
-                    <a href="#swot-analysis" class="text-gray-700 hover:text-blue-700 transition duration-150">تحليل SWOT</a>
+                <!-- روابط التنقل - تم تحسين الخط وتأثير التمرير -->
+                <div style="display: flex; gap: 1.5rem; font-weight: 700; font-size: 1.125rem;" class="main-nav">
+                    <a href="#welcome-splash" class="nav-link" style="color: var(--color-gold);">المقدمة</a> <!-- تم تحديث الرابط والنص -->
+                    <a href="#executive-summary" class="nav-link" style="color: var(--color-text-light);">الملخص</a>
+                    <a href="#team-structure" class="nav-link" style="color: var(--color-text-light);">الفريق</a>
+                    <a href="#funding-ask" class="nav-link" style="color: var(--color-text-light);">التمويل</a>
+                    <a href="#milestones" class="nav-link" style="color: var(--color-text-light);">الإنجازات</a>
+                    <a href="#financial-study" class="nav-link" style="color: var(--color-text-light);">المالية</a>
+                    <a href="#swot-analysis" class="nav-link" style="color: var(--color-text-light);">SWOT</a>
+                    <a href="#expansion-plan" class="nav-link" style="color: var(--color-text-light);">التوسع</a>
                 </div>
             </div>
         </div>
     </nav>
-
-    <!-- شريط التنقل السفلي (يظهر على الموبايل فقط) -->
-    <div class="bottom-nav h-16 flex justify-around items-center">
-        <a href="#executive-summary" class="text-xs font-bold text-gray-700 flex flex-col items-center hover:text-blue-700 transition duration-150">
-            <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-            الملخص
-        </a>
-        <a href="#product-vision" class="text-xs font-bold text-gray-700 flex flex-col items-center hover:text-blue-700 transition duration-150">
-            <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L12 21H3V3h18v12h-5.25L12 21H9.75zM12 21v-3.75"/></svg>
-            المنتج
-        </a>
-        <a href="#financial-study" class="text-xs font-bold text-gray-700 flex flex-col items-center hover:text-blue-700 transition duration-150">
-            <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
-            المالية
-        </a>
-        <a href="#swot-analysis" class="text-xs font-bold text-gray-700 flex flex-col items-center hover:text-blue-700 transition duration-150">
-            <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-            SWOT
-        </a>
+    
+    <!-- شريط التنقل السفلي (للهاتف - تم إعادته) -->
+    <div class="bottom-nav h-16 flex justify-around items-center" style="height: 4rem; background-color: var(--color-dark-blue);">
+        <a href="#welcome-splash" style="font-size: 0.75rem; font-weight: 700; color: var(--color-gold); text-align: center; display: flex; flex-direction: column; align-items: center;">الترحيب</a> <!-- تم تحديث الرابط والنص -->
+        <a href="#executive-summary" style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-light); text-align: center; display: flex; flex-direction: column; align-items: center;">الملخص</a>
+        <a href="#team-structure" style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-light); text-align: center; display: flex; flex-direction: column; align-items: center;">الفريق</a>
+        <a href="#financial-study" style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-light); text-align: center; display: flex; flex-direction: column; align-items: center;">المالية</a>
+        <a href="#funding-ask" style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-light); text-align: center; display: flex; flex-direction: column; align-items: center;">التمويل</a>
     </div>
 
-    <!-- القسم الأول: المقدمة التنفيذية (Executive Summary) -->
-    <section id="executive-summary" class="py-16 sm:py-24 dark-section-bg" style="color: var(--color-text-light);">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
-            <h1 class="hero-title text-5xl sm:text-7xl font-black mb-4 tracking-wider" style="color: var(--color-gold);">دراسة جدوى استثمارية</h1>
-            <p class="hero-subtitle text-xl sm:text-3xl mb-10 font-light" style="color: #A9B7C7;">**"BRAND X":** الجيل الجديد من الملابس المخصصة في السوق السوري.</p>
+    <!-- القسم الترحيبي المبتكر (Splash Screen) -->
+    <section id="welcome-splash" class="py-16 sm:py-24 dark-section-bg" style="background-color: var(--color-dark-blue); padding-top: 10rem; padding-bottom: 10rem; text-align: center; border-bottom: 5px solid var(--color-gold);">
+        <div style="max-width: 900px; margin: auto; padding: 0 1rem;">
+            <p style="font-size: 2rem; font-weight: 600; color: #A9B7C7; margin-bottom: 1rem; text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);">
+                أهلاً بكم في قمة الابتكار المالي
+            </p>
+            <h1 style="font-size: 4rem; font-weight: 900; letter-spacing: 0.08em; color: var(--color-gold); text-shadow: 0 0 45px rgba(255, 215, 0, 1.0); font-family: 'Montserrat', sans-serif; line-height: 1.2;">
+                رؤية استثمارية جاهزة للانطلاق
+            </h1>
+            <a href="#opportunity-statement" style="display: inline-block; margin-top: 3rem; font-size: 1.125rem; font-weight: 700; color: var(--color-dark-blue); background-color: var(--color-gold); padding: 0.75rem 2.5rem; border-radius: 9999px; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.8); text-decoration: none; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                ابدأ باستكشاف الفرصة ⬇️
+            </a>
+        </div>
+    </section>
+
+    <!-- القسم الجديد: بيان الفرصة السوقية (The Opportunity Statement) -->
+    <section id="opportunity-statement" class="py-16 sm:py-24 mid-section-bg" style="padding-top: 6rem; padding-bottom: 6rem;">
+        <div style="max-width: 1000px; margin: auto; padding: 0 1rem; text-align: center;">
+            <h2 style="font-size: 2.25rem; font-weight: 900; margin-bottom: 2rem; color: var(--color-gold); font-family: 'Montserrat', 'Cairo', sans-serif; letter-spacing: 0.1em; text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);">المشكلة | الحل | السوق</h2>
             
-            <!-- لوحة إبراز الأرقام الرئيسية - تعود لعمود واحد على الهاتف -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- المشكلة -->
+                <div class="p-6 rounded-xl shadow-2xl content-card" style="border-top: 5px solid #991B1B;">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: #991B1B;">1. المشكلة</h3>
+                    <p style="color: #cccccc;">السوق السوري يعاني من **فجوة ضخمة** بين الجودة والتخصيص في قطاع الملابس. المتاجر التقليدية بطيئة، وخدمات الطباعة مكلفة، ولا توجد منصة موثوقة تدمج التكنولوجيا لتقديم **القيمة الفردية**. الجمهور الشاب يطالب بالتفرد.</p>
+                </div>
+                
+                <!-- الحل -->
+                <div class="p-6 rounded-xl shadow-2xl content-card" style="border-top: 5px solid #68D391;">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: #68D391;">2. حل BRAND X</h3>
+                    <p style="color: #cccccc;">منصة تكنولوجية تجمع بين **التصميم بالذكاء الاصطناعي (AI-Powered)** والتنفيذ عبر **شريك مصنعي موثوق (Asset-Light)**. نلغي الحاجة لرأس مال المعدات ونركز على التسويق المؤثر، مما يقلل التكاليف الثابتة إلى $580 شهرياً فقط.</p>
+                </div>
+                
+                <!-- السوق -->
+                <div class="p-6 rounded-xl shadow-2xl content-card" style="border-top: 5px solid #4682B4;">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: #4682B4;">3. فرصة الاستثمار</h3>
+                    <p style="color: #cccccc;">استثمار أولي متناهي الصغر ($4,000) يغطي التشغيل حتى نقطة التعادل، مع هامش ربح إجمالي 51%، ونقطة تعادل زمنية متوقعة في **الشهر 5**. نموذج عمل مؤهل للتوسع الإقليمي بعد إثبات نجاحه محلياً.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- القسم الأول: المقدمة التنفيذية (Executive Summary) -->
+    <section id="executive-summary" class="py-16 sm:py-24 dark-section-bg section-with-shadow" style="background-color: var(--color-dark-blue);">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem; text-align: center;">
+            <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; letter-spacing: 0.05em; color: var(--color-gold); text-shadow: var(--shadow-gold); font-family: 'Montserrat', sans-serif;">دراسة جدوى استثمارية</h1>
+            <p style="font-size: 1.75rem; margin-bottom: 3rem; font-weight: 600; color: #A9B7C7;">**"BRAND X":** الجيل الجديد من الملابس المخصصة في السوق السوري.</p>
+            
+            <!-- لوحة إبراز الأرقام الرئيسية - تم تعزيز الستايل الداخلي -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12">
-                <div class="bg-gray-800/60 p-5 sm:p-6 rounded-xl shadow-2xl border-b-4 border-yellow-500">
-                    <p class="text-sm font-light text-gray-400">رأس المال الأولي الفوري</p>
-                    <p class="text-3xl sm:text-4xl font-extrabold mt-1" style="color: var(--color-gold);">$3,400</p>
+                <div class="p-6 key-metric-box" style="transition-delay: 0.1s;">
+                    <p style="font-size: 0.875rem; font-weight: 400; color: #9CA3AF;">رأس المال الأولي الفوري</p>
+                    <p style="font-size: 2.5rem; font-weight: 900; margin-top: 0.5rem; color: var(--color-gold);">$3,400</p>
                 </div>
-                <div class="bg-gray-800/60 p-5 sm:p-6 rounded-xl shadow-2xl border-b-4 border-yellow-500">
-                    <p class="text-sm font-light text-gray-400">التكاليف الشهرية الثابتة</p>
-                    <p class="text-3xl sm:text-4xl font-extrabold mt-1" style="color: var(--color-gold);">$580</p>
+                <div class="p-6 key-metric-box" style="transition-delay: 0.2s;">
+                    <p style="font-size: 0.875rem; font-weight: 400; color: #9CA3AF;">التكاليف الشهرية الثابتة</p>
+                    <p style="font-size: 2.5rem; font-weight: 900; margin-top: 0.5rem; color: var(--color-gold);">$580</p>
                 </div>
-                <div class="bg-gray-800/60 p-5 sm:p-6 rounded-xl shadow-2xl border-b-4 border-yellow-500">
-                    <p class="text-sm font-light text-gray-400">حالة الخطة</p>
-                    <p class="text-3xl sm:text-4xl font-extrabold mt-1" style="color: #38A169;">90% جاهز</p>
+                <div class="p-6 key-metric-box" style="transition-delay: 0.3s;">
+                    <p style="font-size: 0.875rem; font-weight: 400; color: #9CA3AF;">حالة الخطة</p>
+                    <p style="font-size: 2.5rem; font-weight: 900; margin-top: 0.5rem; color: #68D391;">✅ مُكتملة</p>
                 </div>
             </div>
 
-            <div class="p-6 sm:p-10 rounded-2xl shadow-2xl" style="background-color: #102A43; border: 2px solid var(--color-accent-blue);">
-                <p class="text-lg sm:text-xl leading-loose font-medium" style="color: var(--color-text-light);">
+            <div class="p-8 rounded-xl shadow-2xl" style="background-color: var(--color-mid-navy); border: 2px solid var(--color-accent-blue);">
+                <p style="font-size: 1.25rem; line-height: 2; font-weight: 400; color: var(--color-text-light);">
                     نقدم نموذج عمل ريادي يجمع بين **قوة الذكاء الاصطناعي (AI)** في التصميم و**الكفاءة الإنتاجية العالية** عبر شراكة استراتيجية. هذا المزيج يضعنا في موقع الريادة بعيداً عن المنافسة التقليدية، ويضمن الجودة الفائقة وسرعة الاستجابة لمتطلبات السوق.
                     <br>
-                    <span class="font-extrabold" style="color: var(--color-gold);">القيمة المضافة:</span> إلغاء تكاليف المعدات، التحكم بالجودة، والاعتماد على التسويق المؤثر.
+                    <span style="font-weight: 700; color: var(--color-gold);">القيمة المضافة:</span> إلغاء تكاليف المعدات، التحكم بالجودة، والاعتماد على التسويق المؤثر.
                 </p>
             </div>
         </div>
     </section>
-    
-    <!-- قسم: رؤية المنتج: المتجر التجريبي (MVP) -->
-    <section id="product-vision" class="py-16 sm:py-20 dark-section-bg" style="color: var(--color-text-light);">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl sm:text-4xl font-black section-title text-white animate-on-scroll" style="color: var(--color-gold);">رؤية المنتج: المتجر التجريبي (MVP)</h2>
-            <p class="text-xl mb-10 text-center font-light" style="color: #A9B7C7;">تحويل الدراسة إلى واقع: شاهد النسخة الأولية للمتجر واستكشف واجهة المستخدم.</p>
 
-            <div class="iframe-container animate-on-scroll" style="transition-delay: 0.2s;">
+    <!-- قسم جديد: هيكلية الفريق الأساسي -->
+    <section id="team-structure" class="py-16 sm:py-20 mid-section-bg">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <h2 style="font-size: 2.25rem;" class="section-title">الفريق الأساسي والكفاءة التنفيذية</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2.5rem; text-align: center; font-weight: 400; color: #A9B7C7;">يتكون الفريق الأساسي من 4 أعضاء، تم اختيارهم لضمان تغطية الجوانب التقنية، التسويقية، والتشغيلية بأقل تكلفة ممكنة.</p>
+            
+            <!-- تم تعديل الأيقونات واستبدالها بتنسيق رسمي وموحد -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mt-10">
+                
+                <!-- الدور 1: قائد المشروع (المؤسس) -->
+                <div class="team-card">
+                    <h4 style="font-size: 1.25rem; font-weight: 900; color: var(--color-gold); margin-bottom: 0.5rem;">قائد المشروع (المؤسس)</h4>
+                    <span style="font-size: 0.875rem; font-weight: 800; color: var(--color-accent-blue); display: block; margin-bottom: 0.5rem;">(CEO/Visionary)</span>
+                    <p style="font-size: 0.875rem; color: #cccccc;">الرؤية، الإستراتيجية، الشراكات الرئيسية (المصنع)، تأمين الاستثمار.</p>
+                </div>
+
+                <!-- الدور 2: مسؤول التسويق الرقمي -->
+                <div class="team-card">
+                    <h4 style="font-size: 1.25rem; font-weight: 900; color: var(--color-gold); margin-bottom: 0.5rem;">مسؤول التسويق الرقمي</h4>
+                    <span style="font-size: 0.875rem; font-weight: 800; color: var(--color-accent-blue); display: block; margin-bottom: 0.5rem;">(Marketing/Analytics)</span>
+                    <p style="font-size: 0.875rem; color: #cccccc;">إدارة حملات المؤثرين، تحليلات البيانات، محتوى السوشيال ميديا، اكتساب العملاء.</p>
+                </div>
+
+                <!-- الدور 3: مصمم/مدير منتج (AI Specialist) -->
+                <div class="team-card">
+                    <h4 style="font-size: 1.25rem; font-weight: 900; color: var(--color-gold); margin-bottom: 0.5rem;">مدير المنتج والذكاء الاصطناعي</h4>
+                    <span style="font-size: 0.875rem; font-weight: 800; color: var(--color-accent-blue); display: block; margin-bottom: 0.5rem;">(Product/AI)</span>
+                    <p style="font-size: 0.875rem; color: #cccccc;">الإشراف على جودة مخرجات AI، إدارة منصة المتجر، تحديثات المنتج التقنية.</p>
+                </div>
+
+                <!-- الدور 4: مسؤول لوجستي وخدمة عملاء -->
+                <div class="team-card">
+                    <h4 style="font-size: 1.25rem; font-weight: 900; color: var(--color-gold); margin-bottom: 0.5rem;">مسؤول لوجستي وخدمة عملاء</h4>
+                    <span style="font-size: 0.875rem; font-weight: 800; color: var(--color-accent-blue); display: block; margin-bottom: 0.5rem;">(Logistics/Support)</span>
+                    <p style="font-size: 0.875rem; color: #cccccc;">تنسيق الشحن والتسليم، متابعة المخزون، إدارة شكاوى العملاء (المرحلة الأولى).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- القسم الجديد: طلب التمويل (Funding Ask) -->
+    <section id="funding-ask" class="py-16 sm:py-20 dark-section-bg" style="background-color: var(--color-dark-blue);">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <h2 style="font-size: 2.25rem;" class="section-title">طلب التمويل (Funding Ask)</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2.5rem; text-align: center; font-weight: 400; color: #A9B7C7;">نبحث عن تمويل أولي (Seed Funding) بقيمة <strong style="color: var(--color-gold);">$4,000</strong> لدعم الانطلاقة وتغطية مرحلة النمو الحرج.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                
+                <!-- إجمالي المبلغ المطلوب -->
+                <div class="key-metric-box p-8" style="grid-column: span 3; text-align: center; border-bottom: 8px solid var(--color-gold);">
+                    <p style="font-size: 1.25rem; font-weight: 600; color: #A9B7C7;">المبلغ الإجمالي المطلوب</p>
+                    <p style="font-size: 3.5rem; font-weight: 900; margin-top: 0.5rem; color: var(--color-gold); text-shadow: var(--shadow-gold); font-family: 'Montserrat', sans-serif;">$4,000</p>
+                    <p style="font-size: 1rem; color: #68D391;">يضمن تغطية 3 أشهر من التشغيل الثابت وحملة تسويقية قوية</p>
+                </div>
+
+                <!-- جدول تفصيل الاستخدام الرأسمالي - محدث لـ $4000 -->
+                <div style="grid-column: span 3;">
+                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; border-bottom: 2px solid var(--color-accent-blue); padding-bottom: 0.5rem; color: var(--color-gold);">تفصيل استخدام التمويل (The Use of Funds)</h3>
+                    <div class="table-container">
+                        <table style="width: 100%; border-radius: 0.5rem; box-shadow: var(--shadow-deep); background-color: var(--color-mid-navy); color: white;">
+                            <thead>
+                                <tr style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gold); background-color: var(--color-dark-blue);">
+                                    <th style="padding: 1rem; text-align: right; font-weight: 700; min-width: 200px;">البند</th>
+                                    <th style="padding: 1rem; text-align: center; font-weight: 700; min-width: 150px;">المبلغ المطلوب ($)</th>
+                                    <th style="padding: 1rem; text-align: center; font-weight: 700; min-width: 100px;">نسبة التمويل (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody style="border-color: #1a3a5a;">
+                                <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                    <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">1. رأس المال التشغيلي (3 أشهر ثابته)</td>
+                                    <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">$1,740</td>
+                                    <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">43.5%</td>
+                                </tr>
+                                <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                    <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">2. التسويق وحملات المؤثرين (Launch Marketing)</td>
+                                    <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">$1,200</td>
+                                    <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">30.0%</td>
+                                </tr>
+                                <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                    <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">3. تطوير وتحديث منصة AI/الموقع</td>
+                                    <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">$700</td>
+                                    <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">17.5%</td>
+                                </tr>
+                                <tr style="transition: background-color 0.15s;">
+                                    <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">4. رأس مال احتياطي (Contingency)</td>
+                                    <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">$360</td>
+                                    <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">9.0%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم الإنجازات (Milestones) -->
+    <section id="milestones" class="py-16 sm:py-20 mid-section-bg">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <h2 style="font-size: 2.25rem;" class="section-title">مؤشرات الإنجاز الرئيسية (Milestones)</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2.5rem; text-align: center; font-weight: 400; color: #A9B7C7;">الأهداف التشغيلية والمالية التي سنحققها باستخدام تمويل $4,000.</p>
+
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <!-- الإنجاز 1: إطلاق المنتج -->
+                    <div class="content-card p-6 rounded-xl shadow-2xl" style="border-left: 8px solid #FFD700;">
+                        <h4 style="font-weight: 900; margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--color-gold);">المرحلة 1: الانطلاق (الشهر 1)</h4>
+                        <ul style="list-style: none; padding-right: 0.5rem; font-size: 1.125rem; color: #cccccc; margin-top: 0.75rem;">
+                            <li style="margin-bottom: 0.5rem;">• إطلاق المنصة النهائية والربط مع المصنع.</li>
+                            <li style="margin-bottom: 0.5rem;">• تفعيل أول حملة تسويق عبر المؤثرين.</li>
+                            <li style="margin-bottom: 0.5rem;">• **هدف الوحدات:** 50 وحدة مبيعة.</li>
+                        </ul>
+                    </div>
+
+                    <!-- الإنجاز 2: الوصول للتعادل -->
+                    <div class="content-card p-6 rounded-xl shadow-2xl" style="border-left: 8px solid #68D391;">
+                        <h4 style="font-weight: 900; margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--color-gold);">المرحلة 2: الوصول للتعادل (الشهر 5)</h4>
+                        <ul style="list-style: none; padding-right: 0.5rem; font-size: 1.125rem; color: #cccccc; margin-top: 0.75rem;">
+                            <li style="margin-bottom: 0.5rem;">• تغطية كامل التكاليف الثابتة والتشغيلية.</li>
+                            <li style="margin-bottom: 0.5rem;">• تحقيق **80% من نمو المبيعات المتوقع**.</li>
+                            <li style="margin-bottom: 0.5rem;">• **نقطة التعادل:** 67 وحدة شهرياً.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- الإنجاز 3: الاستدامة -->
+                    <div class="content-card p-6 rounded-xl shadow-2xl" style="border-left: 8px solid #4682B4;">
+                        <h4 style="font-weight: 900; margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--color-gold);">المرحلة 3: الاستدامة (نهاية الشهر 12)</h4>
+                        <ul style="list-style: none; padding-right: 0.5rem; font-size: 1.125rem; color: #cccccc; margin-top: 0.75rem;">
+                            <li style="margin-bottom: 0.5rem;">• تحقيق **صافي ربح تراكمي إيجابي**.</li>
+                            <li style="margin-bottom: 0.5rem;">• تفعيل **خطة التوسع (B2B)**.</li>
+                            <li style="margin-bottom: 0.5rem;">• **AOV (متوسط الطلب):** تحقيق $18+.</li>
+                        </ul>
+                    </div>
+
+                    <!-- الإنجاز 4: العائد على الاستثمار -->
+                    <div class="content-card p-6 rounded-xl shadow-2xl" style="border-left: 8px solid #991B1B;">
+                        <h4 style="font-weight: 900; margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--color-gold);">المرحلة 4: العائد على الاستثمار (ROI)</h4>
+                        <ul style="list-style: none; padding-right: 0.5rem; font-size: 1.125rem; color: #cccccc; margin-top: 0.75rem;">
+                            <li style="margin-bottom: 0.5rem;">• **تغطية التمويل ($4000)** من التدفقات النقدية.</li>
+                            <li style="margin-bottom: 0.5rem;">• إطلاق منتجين جديدين (بيجامات/جواكيت).</li>
+                            <li style="margin-bottom: 0.5rem;">• **تقييم جديد للشركة:** للاستثمار اللاحق (Series A).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم: رؤية المنتج: المتجر التجريبي (MVP) -->
+    <section id="product-vision" class="py-16 sm:py-20 dark-section-bg" style="background-color: var(--color-dark-blue);">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <h2 style="font-size: 2.25rem;" class="section-title">رؤية المنتج: المتجر التجريبي (MVP)</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2.5rem; text-align: center; font-weight: 400; color: #A9B7C7;">تحويل الدراسة إلى واقع: شاهد النسخة الأولية للمتجر واستكشف واجهة المستخدم.</p>
+
+            <div style="position: relative; padding-top: 56.25%; margin-bottom: 2rem; box-shadow: var(--shadow-deep); border-radius: 1.5rem; overflow: hidden; transition: transform var(--transition-speed);" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
                 <!-- iFrame لعرض المتجر التجريبي -->
                 <iframe 
                     src="https://brandx-lsj4hm.manus.space/" 
-                    class="iframe-mockup"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1.5rem; border: 15px solid var(--color-mid-navy);"
                     title="BRAND X Prototype Store"
                 ></iframe>
             </div>
             
-            <p class="text-center text-sm font-bold mt-4 sm:hidden" style="color: var(--color-gold);">
-                لأفضل تجربة تفاعلية، يرجى الضغط على الرابط في الأسفل.
-            </p>
-
-            <div class="text-center mt-8 animate-on-scroll">
+            <div style="text-align: center; margin-top: 2rem;">
                 <a href="https://brandx-lsj4hm.manus.space/" target="_blank" 
-                   class="gold-button py-3 px-6 text-lg font-bold rounded-lg transition duration-300 transform hover:scale-105 mobile-link-btn sm:text-xl sm:px-10" 
-                   style="background-color: var(--color-gold); color: var(--color-dark-blue);">
-                    الذهاب إلى المتجر في نافذة جديدة ↗️
+                   class="gold-button" 
+                   style="background-color: var(--color-gold); color: var(--color-dark-blue); padding: 0.75rem 2.5rem; font-size: 1.25rem; font-weight: 700; border-radius: 9999px; display: inline-block;">
+                    ابدأ بتجربة الذكاء الاصطناعي الآن 🚀
                 </a>
             </div>
         </div>
     </section>
 
     <!-- القسم الثاني: الدراسة التسويقية والتسعير (Market Study & Pricing) -->
-    <section id="market-study" class="py-16 sm:py-20">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl sm:text-4xl font-black section-title text-gray-800 animate-on-scroll">1. استراتيجية السوق والتسعير التنافسي</h2>
+    <section id="market-study" class="py-16 sm:py-20 mid-section-bg">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <h2 style="font-size: 2.25rem;" class="section-title">1. استراتيجية السوق والتسعير التنافسي</h2>
             
-            <!-- نقاط القوة التنافسية - تعود لعمود واحد على الهاتف -->
+            <!-- نقاط القوة التنافسية - تم حذف الأيقونات واستبدالها بنظام تصميم أنظف -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-10">
-                <div class="card p-6 rounded-xl shadow-xl animate-on-scroll bg-white" style="transition-delay: 0.1s;">
-                    <div class="icon-box w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 text-2xl sm:text-3xl font-bold shadow-md">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-dark-blue);">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l-2 3M9 19c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m6 18V6l2 3m-2 12c2.485 0 4.5-4.03 4.5-9s-2.015-9-4.5-9m-9 9h6m-9 0h6"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3" style="color: var(--color-dark-blue);">الابتكار والريادة</h3>
-                    <p class="text-gray-600">أول من يقدم دمج AI لتصميم الأزياء بالكامل عبر منصة إلكترونية في المنطقة.</p>
+                <div class="p-6 rounded-xl shadow-2xl content-card" style="transition-delay: 0.1s; border-top: 5px solid var(--color-gold);">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: var(--color-gold);">الابتكار والريادة</h3>
+                    <p style="color: #cccccc; font-weight: 400;">أول من يقدم دمج AI لتصميم الأزياء بالكامل عبر منصة إلكترونية في المنطقة.</p>
                 </div>
-
-                <div class="card p-6 rounded-xl shadow-xl animate-on-scroll bg-white" style="transition-delay: 0.2s;">
-                    <div class="icon-box w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 text-2xl sm:text-3xl font-bold shadow-md">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-dark-blue);">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.942 3.333.338 2.807 1.882a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.942 1.543-.338 3.333-1.882 2.807a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.942-3.333-.338-2.807-1.882a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.942-1.543.338-3.333 1.882-2.807a1.724 1.724 0 002.572-1.065z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3" style="color: var(--color-dark-blue);">كفاءة التشغيل</h3>
-                    <p class="text-gray-600">الشراكة مع المصنع تلغي تكاليف المعدات وتضمن جودة إنتاج متفوقة على المنافسين.</p>
+                <!-- البطاقة الثانية -->
+                <div class="p-6 rounded-xl shadow-2xl content-card" style="transition-delay: 0.2s; border-top: 5px solid var(--color-gold);">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: var(--color-gold);">كفاءة التشغيل</h3>
+                    <p style="color: #cccccc; font-weight: 400;">الشراكة مع المصنع تلغي تكاليف المعدات وتضمن جودة إنتاج متفوقة على المنافسين.</p>
                 </div>
-
-                <div class="card p-6 rounded-xl shadow-xl animate-on-scroll bg-white" style="transition-delay: 0.3s;">
-                    <div class="icon-box w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-4 text-2xl sm:text-3xl font-bold shadow-md">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-dark-blue);">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3" style="color: var(--color-dark-blue);">التسويق المُدار</h3>
-                    <p class="text-gray-600">استراتيجية "براندات المشاهير" تضمن تسويقاً ضخماً، موثوقاً، وقائم على العمولة.</p>
+                <!-- البطاقة الثالثة -->
+                <div class="p-6 rounded-xl shadow-2xl content-card" style="transition-delay: 0.3s; border-top: 5px solid var(--color-gold);">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: var(--color-gold);">التسويق المُدار</h3>
+                    <p style="color: #cccccc; font-weight: 400;">استراتيجية "براندات المشاهير" تضمن تسويقاً ضخماً، موثوقاً، وقائم على العمولة.</p>
                 </div>
             </div>
 
-            <!-- استراتيجية التسعير الجديدة -->
-            <div class="mt-12 sm:mt-16 p-6 sm:p-8 rounded-xl shadow-2xl border-t-8 dark-section-bg" style="border-color: var(--color-gold);">
-                <h3 class="text-2xl sm:text-3xl font-extrabold mb-6" style="color: var(--color-gold);">هيكل التسعير متعدد المستويات</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-lg" style="color: var(--color-text-light);">
-                    <ul class="space-y-4">
-                        <li class="p-3 rounded-lg flex items-start" style="background-color: #102A43;">
-                            <span class="text-2xl mr-3" style="color: var(--color-gold);">⭐</span>
+            <!-- استراتيجية التسعير الجديدة (محفوظة بالستايل المضمن) -->
+            <div class="mt-12 sm:mt-16 p-6 sm:p-8 rounded-xl shadow-2xl border-t-8" style="border-color: var(--color-gold); background-color: var(--color-mid-navy);">
+                <h3 style="font-size: 1.875rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--color-gold);">هيكل التسعير متعدد المستويات</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" style="font-size: 1.125rem; color: var(--color-text-light);">
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="p-3 rounded-xl flex items-center key-metric-box" style="margin-bottom: 1rem; border-top: 5px solid var(--color-gold); border-bottom: none; transition-delay: 0.1s; background-color: var(--color-dark-blue);">
+                            <span style="font-size: 1.5rem; margin-left: 0.75rem; color: var(--color-gold);">•</span>
                             <div>
-                                <strong class="text-lg sm:text-xl block">استعمال أدوات الذكاء الاصطناعي: مجاناً</strong>
-                                <span class="text-gray-400 text-sm">بوابة لجذب قاعدة مستخدمين واسعة وزيادة حركة المرور على الموقع.</span>
+                                <strong style="font-size: 1.25rem; font-weight: 700; display: block;">استعمال أدوات الذكاء الاصطناعي: مجاناً</strong>
+                                <span style="color: #9CA3AF; font-size: 0.875rem;">بوابة لجذب قاعدة مستخدمين واسعة وزيادة حركة المرور على الموقع.</span>
                             </div>
                         </li>
-                        <li class="p-3 rounded-lg flex items-start" style="background-color: #102A43;">
-                            <span class="text-2xl mr-3" style="color: var(--color-gold);">💸</span>
+                        <li class="p-3 rounded-xl flex items-center key-metric-box" style="margin-bottom: 1rem; border-top: 5px solid var(--color-gold); border-bottom: none; transition-delay: 0.2s; background-color: var(--color-dark-blue);">
+                            <span style="font-size: 1.5rem; margin-left: 0.75rem; color: var(--color-gold);">•</span>
                             <div>
-                                <strong class="text-lg sm:text-xl block">الطباعة عبر AI (تيشيرت/هودي): متوسطة التكلفة</strong>
-                                <span class="text-gray-400 text-sm">تسعير تنافسي يسمح بالانتشار ويستهدف الشريحة الأكبر من الشباب.</span>
+                                <strong style="font-size: 1.25rem; font-weight: 700; display: block;">الطباعة عبر AI (تيشيرت/هودي): متوسطة التكلفة</strong>
+                                <span style="color: #9CA3AF; font-size: 0.875rem;">تسعير تنافسي يسمح بالانتشار ويستهدف الشريحة الأكبر من الشباب.</span>
                             </div>
                         </li>
                     </ul>
-                    <ul class="space-y-4">
-                        <li class="p-3 rounded-lg flex items-start" style="background-color: #102A43;">
-                            <span class="text-2xl mr-3" style="color: var(--color-gold);">💎</span>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="p-3 rounded-xl flex items-center key-metric-box" style="margin-bottom: 1rem; border-top: 5px solid var(--color-gold); border-bottom: none; transition-delay: 0.3s; background-color: var(--color-dark-blue);">
+                            <span style="font-size: 1.5rem; margin-left: 0.75rem; color: var(--color-gold);">•</span>
                             <div>
-                                <strong class="text-lg sm:text-xl block">خدمة تصميم الملابس والتفصيل: مرتفعة</strong>
-                                <span class="text-gray-400 text-sm">تستهدف هوامش ربح عالية، وتستغل ميزة الريادة في تقديم هذه الخدمة الحصرية.</span>
+                                <strong style="font-size: 1.25rem; font-weight: 700; display: block;">خدمة تصميم الملابس والتفصيل: مرتفعة</strong>
+                                <span style="color: #9CA3AF; font-size: 0.875rem;">تستهدف هوامش ربح عالية، وتستغل ميزة الريادة في تقديم هذه الخدمة الحصرية.</span>
                             </div>
                         </li>
-                        <li class="p-3 rounded-lg flex items-start" style="background-color: #102A43;">
-                            <span class="text-2xl mr-3" style="color: var(--color-gold);">👑</span>
+                        <li class="p-3 rounded-xl flex items-center key-metric-box" style="margin-bottom: 1rem; border-top: 5px solid var(--color-gold); border-bottom: none; transition-delay: 0.4s; background-color: var(--color-dark-blue);">
+                            <span style="font-size: 1.5rem; margin-left: 0.75rem; color: var(--color-gold);">•</span>
                             <div>
-                                <strong class="text-lg sm:text-xl block">الشراء من براندات المشاهير: مرتفعة نسبياً</strong>
-                                <span class="text-gray-400 text-sm">يتم تسعيرها لتغطية نسبة عمولة المؤثر، مع الاستفادة من قوة العلامة الشخصية.</span>
+                                <strong style="font-size: 1.25rem; font-weight: 700; display: block;">الشراء من براندات المشاهير: مرتفعة نسبياً</strong>
+                                <span style="color: #9CA3AF; font-size: 0.875rem;">يتم تسعيرها لتغطية نسبة عمولة المؤثر، مع الاستفادة من قوة العلامة الشخصية.</span>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
             
-             <!-- اقتراحات التشغيل -->
-            <div class="mt-12 sm:mt-16 animate-on-scroll">
-                <h3 class="text-2xl sm:text-3xl font-black mb-4 border-b-2 pb-2" style="color: var(--color-dark-blue); border-color: var(--color-accent-blue);">التحكم التشغيلي والجودة</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-lg">
-                    <div class="p-6 rounded-lg shadow-xl bg-white border-l-4" style="border-color: var(--color-accent-blue);">
-                        <h4 class="font-extrabold mb-2 text-xl text-gray-800">بروتوكول الشراكة والجودة (SLA)</h4>
-                        <p class="text-gray-600">يجب وضع **اتفاقية مستوى خدمة (SLA)** صارمة مع المصنع لتحديد مهلة التنفيذ القصوى، معايير الجودة، وإجراءات التعويض عن أي تأخير أو عيوب. ضمان جودة ثابتة هو مفتاح الثقة الإلكترونية.</p>
+            <!-- اقتراحات التشغيل (تم الحفاظ على التصميم الأصلي) -->
+             <div class="mt-12 sm:mt-16" style="background-color: var(--color-mid-navy); padding-top: 4rem;">
+                <h3 style="font-size: 1.875rem; font-weight: 900; margin-bottom: 1rem; border-bottom: 5px solid var(--color-gold); padding-bottom: 0.5rem; color: var(--color-text-light);">التحكم التشغيلي والجودة</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" style="font-size: 1.125rem;">
+                    <div class="content-card p-6 rounded-xl shadow-2xl" style="border-left: 8px solid var(--color-accent-blue);">
+                        <h4 style="font-weight: 800; margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--color-gold);">بروتوكول الشراكة والجودة (SLA)</h4>
+                        <p style="color: #cccccc; font-weight: 400;">يجب وضع **اتفاقية مستوى خدمة (SLA)** صارمة مع المصنع لتحديد مهلة التنفيذ القصوى، معايير الجودة، وإجراءات التعويض عن أي تأخير أو عيوب. ضمان جودة ثابتة هو مفتاح الثقة الإلكترونية.</p>
                     </div>
-                    <div class="p-6 rounded-lg shadow-xl bg-white border-l-4" style="border-color: var(--color-accent-blue);">
-                        <h4 class="font-extrabold mb-2 text-xl text-gray-800">التغليف الفاخر وتجربة العميل</h4>
-                        <p class="text-gray-600">استخدام **تغليف "اللحظة"** (Moment Packaging) الفاخر (صندوق كحلي، بطاقة ضمان، رسالة شكر) لتحويل عملية الاستلام إلى "تجربة فتح صندوق" تُشارك على وسائل التواصل الاجتماعي.</p>
+                    <div class="content-card p-6 rounded-xl shadow-2xl" style="border-left: 8px solid var(--color-accent-blue);">
+                        <h4 style="font-weight: 800; margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--color-gold);">التغليف الفاخر وتجربة العميل</h4>
+                        <p style="color: #cccccc; font-weight: 400;">استخدام **تغليف "اللحظة"** (Moment Packaging) الفاخر (صندوق كحلي، بطاقة ضمان، رسالة شكر) لتحويل عملية الاستلام إلى "تجربة فتح صندوق" تُشارك على وسائل التواصل الاجتماعي.</p>
                     </div>
                 </div>
             </div>
@@ -389,111 +574,244 @@
     </section>
     
     <!-- القسم الثالث: الدراسة المالية (Financial Study) - الرسوم البيانية -->
-    <section id="financial-study" class="py-16 sm:py-20 dark-section-bg" style="color: var(--color-text-light);">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl sm:text-4xl font-black section-title text-white animate-on-scroll" style="color: var(--color-gold);">2. المخطط المالي الأولي ($USD)</h2>
-            <p class="text-lg sm:text-xl mb-8 font-light" style="color: #A9B7C7;">تقديرات مبدئية لهيكل التكاليف المطلوبة للانطلاق، مع مراعاة التحديثات الأخيرة.</p>
+    <section id="financial-study" class="py-16 sm:py-20 dark-section-bg section-with-shadow" style="background-color: var(--color-dark-blue);">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <h2 style="font-size: 2.25rem;" class="section-title">2. المخطط المالي الأولي ($USD)</h2>
+            <p style="font-size: 1.125rem; margin-bottom: 2rem; font-weight: 400; color: #A9B7C7;">تحليل مفصّل لتكلفة المنتج المباع (COGS) وحساب دقيق لنقطة التعادل بناءً على البيانات الحالية.</p>
 
-            <!-- الرسوم البيانية - تعود لعمود واحد على الهاتف -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12">
+            <!-- لوحة تحليل COGS وهامش الربح الإجمالي -->
+            <div class="mt-8 sm:mt-12">
+                <h3 style="font-size: 1.875rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-accent-blue); padding-bottom: 0.5rem; color: var(--color-gold);">هيكل تكلفة المنتج المباع (COGS) وهامش المساهمة</h3>
+                <div class="table-container" style="margin-bottom: 2.5rem;">
+                    <table style="width: 100%; border-radius: 0.5rem; box-shadow: var(--shadow-deep); background-color: var(--color-mid-navy); color: white;">
+                        <thead>
+                            <tr style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gold); background-color: var(--color-dark-blue);">
+                                <th style="padding: 1rem; text-align: right; font-weight: 700; min-width: 200px;">المنتج (متوسط السعر/التكلفة)</th>
+                                <th style="padding: 1rem; text-align: center; font-weight: 700; min-width: 150px;">التكلفة المتغيرة (وحدة $)</th>
+                                <th style="padding: 1rem; text-align: center; font-weight: 700; min-width: 150px;">سعر البيع المقترح ($)</th>
+                                <th style="padding: 1rem; text-align: center; font-weight: 700; min-width: 150px;">هامش الربح الإجمالي (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody style="border-color: #1a3a5a;">
+                            <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">👕 تيشيرت مُخصص (13.5$ - 5$)</td>
+                                <td style="padding: 1rem; text-align: center; color: #F87171; font-size: 0.875rem;">$5.00</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">$13.50</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">63%</td>
+                            </tr>
+                            <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">🧥 هودي مُخصص (20$ - 8$)</td>
+                                <td style="padding: 1rem; text-align: center; color: #F87171; font-size: 0.875rem;">$8.00</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">$20.00</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">60%</td>
+                            </tr>
+                            <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">🧵 خدمة تفصيل حصرية (75$ - 37.5$)</td>
+                                <td style="padding: 1rem; text-align: center; color: #F87171; font-size: 0.875rem;">$37.50</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">$75.00</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">50%</td>
+                            </tr>
+                            <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">📦 الطلبات الكبيرة/الجملة (8.75$ - 6.5$)</td>
+                                <td style="padding: 1rem; text-align: center; color: #F87171; font-size: 0.875rem;">$6.50</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">$8.75</td>
+                                <td style="padding: 1rem; text-align: center; color: #F6E05E; font-size: 0.875rem;">26%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- لوحة تحليل نقطة التعادل (BEP) -->
+                <div class="p-6 sm:p-8 rounded-xl shadow-2xl border-b-4" style="background-color: var(--color-mid-navy); border-color: var(--color-gold);">
+                    <h4 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--color-gold);">ملخص الربحية ونقطة التعادل</h4>
+                    <div style="font-size: 1.125rem; line-height: 1.5; color: #cccccc;">
+                        <p style="margin-bottom: 0.5rem;">
+                            <strong style="color: var(--color-gold);">متوسط هامش الربح الإجمالي (GPM):</strong> <span id="gpm"></span>
+                        </p>
+                        <p style="margin-bottom: 0.5rem;">
+                            <strong style="color: var(--color-gold);">متوسط هامش المساهمة الموزون (WACM):</strong> <span id="contributionMargin"></span>
+                        </p>
+                        <p style="margin-bottom: 1rem;">
+                            <strong style="color: var(--color-gold);">التكاليف الثابتة الشهرية (FC):</strong> <span id="fixedCost">$580</span>
+                        </p>
+                    </div>
+                    <hr style="margin: 1rem 0; border-color: var(--color-accent-blue);">
+                    <p style="font-size: 1.5rem; font-weight: 900; text-align: center; color: var(--color-gold);">
+                        🎯 نقطة التعادل (بالوحدات): <span id="breakevenUnits"></span>
+                    </p>
+                    <p style="font-size: 1.5rem; font-weight: 900; text-align: center; color: var(--color-gold);">
+                        🗓️ نقطة التعادل (زمنياً): <span id="breakevenMonths"></span>
+                    </p>
+                    <!-- المؤشر غير المالي -->
+                    <hr style="margin: 1rem 0; border-color: var(--color-accent-blue);">
+                    <p class="kpi-icon-container" style="font-size: 1rem; text-align: center; color: #68D391;">
+                         <span class="kpi-icon" style="display: inline-block; margin-left: 0.5rem; font-size: 1.25rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M0 0h1v15H0zm15 11.5l-3.23-3.23a.5.5 0 00-.707 0L8 11.5V11a.5.5 0 00-1 0v.5a.5.5 0 00.5.5h.5l2.293-2.293 3.23 3.23a.5.5 0 00.707-.707z"/>
+                            </svg>
+                         </span>
+                         📊 **المؤشر غير المالي:** معدل تحويل مستخدمي AI إلى مشترين (Target: 5%)
+                    </p>
+                </div>
+            </div>
+
+            <!-- الرسوم البيانية - تم الحفاظ على الهيكل مع ضمان تحديث البيانات -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 mt-12">
                 
                 <!-- الرسم البياني 1: التكاليف الأولية (مرة واحدة) -->
-                <div class="animate-on-scroll" style="transition-delay: 0.1s;">
-                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl" style="background-color: #102A43; border: 1px solid var(--color-accent-blue);">
-                        <h3 class="text-xl font-bold mb-4 text-center" style="color: var(--color-gold);">التكاليف الرأسمالية (مرة واحدة)</h3>
+                <div style="transition-delay: 0.1s;">
+                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl" style="background-color: var(--color-mid-navy); border: 1px solid var(--color-accent-blue);">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; text-align: center; color: var(--color-gold);">التكاليف الرأسمالية (مرة واحدة)</h3>
                         <canvas id="startupChart"></canvas>
-                        <div class="mt-6 text-xl sm:text-2xl font-black text-center" style="color: var(--color-text-light);">الإجمالي الفوري للبدء: **$3400**</div>
+                        <div style="margin-top: 1.5rem; font-size: 1.5rem; font-weight: 900; text-align: center; color: var(--color-text-light);">الإجمالي الفوري للبدء: **$3400**</div>
                     </div>
                 </div>
 
                 <!-- الرسم البياني 2: التكاليف التشغيلية (شهرية) -->
-                <div class="animate-on-scroll" style="transition-delay: 0.2s;">
-                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl" style="background-color: #102A43; border: 1px solid var(--color-accent-blue);">
-                        <h3 class="text-xl font-bold mb-4 text-center" style="color: var(--color-gold);">التكاليف التشغيلية الشهرية (الحد الأدنى)</h3>
+                <div style="transition-delay: 0.2s;">
+                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl" style="background-color: var(--color-mid-navy); border: 1px solid var(--color-accent-blue);">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; text-align: center; color: var(--color-gold);">التكاليف التشغيلية الشهرية (الحد الأدنى)</h3>
                         <canvas id="monthlyChart"></canvas>
-                        <div class="mt-6 text-xl sm:text-2xl font-black text-center" style="color: var(--color-text-light);">الإجمالي الشهري الثابت: **$800**</div>
+                        <div style="margin-top: 1.5rem; font-size: 1.5rem; font-weight: 900; text-align: center; color: var(--color-text-light);">الإجمالي الشهري الثابت: **$580**</div>
                     </div>
                 </div>
             </div>
 
-            <!-- لوحة سيناريوهات النمو -->
-            <div class="mt-12 sm:mt-16 animate-on-scroll">
-                <h3 class="text-2xl sm:text-3xl font-extrabold mb-6 border-b pb-2" style="color: var(--color-gold); border-color: var(--color-accent-blue);">سيناريوهات النمو للسنة الأولى (مثال تقديري)</h3>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full text-white rounded-lg shadow-xl" style="background-color: #102A43;">
+            <!-- لوحة سيناريوهات النمو - تم تحديثها بالأرقام المحسوبة -->
+            <div class="mt-12 sm:mt-16">
+                <h3 style="font-size: 1.875rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-accent-blue); padding-bottom: 0.5rem; color: var(--color-gold);">سيناريوهات النمو للسنة الأولى (محسوبة)</h3>
+                <div class="table-container">
+                    <table style="width: 100%; border-radius: 0.5rem; box-shadow: var(--shadow-deep); background-color: var(--color-mid-navy); color: white;">
                         <thead>
-                            <tr class="mobile-table-header text-sm uppercase tracking-wider" style="color: var(--color-gold); background-color: #1a3a5a;">
-                                <th class="p-4">السيناريو</th>
-                                <th class="p-4">مبيعات متوقعة</th>
-                                <th class="p-4">الربحية</th>
-                                <th class="p-4">التعادل</th>
+                            <tr style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gold); background-color: var(--color-dark-blue);">
+                                <th style="padding: 1rem; font-weight: 700; min-width: 100px;">السيناريو</th>
+                                <th style="padding: 1rem; font-weight: 700; min-width: 200px;">مبيعات متوقعة (وحدة/شهر)</th>
+                                <th style="padding: 1rem; font-weight: 700; min-width: 200px;">متوسط هامش الربح الإجمالي (%)</th>
+                                <th style="padding: 1rem; font-weight: 700; min-width: 150px;">نقطة التعادل (شهر)</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y" style="border-color: #1a3a5a;">
-                            <tr class="hover:bg-gray-700 transition duration-150">
-                                <td class="p-4 mobile-table-text font-bold text-center">المحافظ</td>
-                                <td class="p-4 mobile-table-text text-center">سيحدد لاحقاً</td>
-                                <td class="p-4 mobile-table-text text-center text-red-400">0%</td>
-                                <td class="p-4 mobile-table-text text-center text-red-400">الربع الأول</td>
+                        <tbody style="border-color: #1a3a5a;">
+                            <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: center; font-size: 0.875rem;">المحافظ</td>
+                                <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">75</td>
+                                <td style="padding: 1rem; text-align: center; color: #F87171; font-size: 0.875rem;">51%</td>
+                                <td style="padding: 1rem; text-align: center; color: #F87171; font-size: 0.875rem;">الشهر 49</td>
                             </tr>
-                            <tr class="hover:bg-gray-700 transition duration-150">
-                                <td class="p-4 mobile-table-text font-bold text-center">المتوقع</td>
-                                <td class="p-4 mobile-table-text text-center">سيحدد لاحقاً</td>
-                                <td class="p-4 mobile-table-text text-center text-yellow-400">15% - 25%</td>
-                                <td class="p-4 mobile-table-text text-center text-yellow-400">الربع الثاني</td>
+                            <tr style="transition: background-color 0.15s; border-bottom: 1px solid #1a3a5a;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: center; font-size: 0.875rem;">المتوقع</td>
+                                <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">150</td>
+                                <td style="padding: 1rem; text-align: center; color: #F6E05E; font-size: 0.875rem;">51%</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">الشهر 5</td>
                             </tr>
-                            <tr class="hover:bg-gray-700 transition duration-150">
-                                <td class="p-4 mobile-table-text font-bold text-center">المتفائل</td>
-                                <td class="p-4 mobile-table-text text-center">سيحدد لاحقاً</td>
-                                <td class="p-4 mobile-table-text text-center text-green-400">30% - 40%</td>
-                                <td class="p-4 mobile-table-text text-center text-green-400">بداية الربع الثاني</td>
+                            <tr style="transition: background-color 0.15s;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: center; font-size: 0.875rem;">المتفائل</td>
+                                <td style="padding: 1rem; text-align: center; font-size: 0.875rem;">250</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">51%</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-size: 0.875rem;">الشهر 3</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            
+            <!-- جدول التدفق النقدي الجديد -->
+            <div class="mt-12 sm:mt-16">
+                <h3 style="font-size: 1.875rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-accent-blue); padding-bottom: 0.5rem; color: var(--color-gold);">التدفق النقدي المتوقع للعام الأول (السيناريو المتوقع)</h3>
+                <div class="table-container">
+                    <table id="cashFlowTable" style="width: 100%; border-radius: 0.5rem; box-shadow: var(--shadow-deep); background-color: var(--color-mid-navy); color: white; min-width: 1000px;">
+                        <thead>
+                            <tr style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gold); background-color: var(--color-dark-blue);">
+                                <th style="padding: 0.75rem; text-align: center; font-weight: 700; min-width: 80px;">الشهر</th>
+                                <th style="padding: 0.75rem; text-align: center; font-weight: 700; min-width: 120px;">الوحدات المبيعة (متوقع)</th>
+                                <th style="padding: 0.75rem; text-align: center; font-weight: 700; min-width: 120px;">إجمالي الإيرادات ($)</th>
+                                <th style="padding: 0.75rem; text-align: center; font-weight: 700; min-width: 120px;">التكاليف المتغيرة (COGS) ($)</th>
+                                <th style="padding: 0.75rem; text-align: center; font-weight: 700; min-width: 120px;">التكاليف الثابتة ($)</th>
+                                <th style="padding: 0.75rem; text-align: center; font-weight: 700; color: #68D391; min-width: 120px;">صافي الربح الشهري ($)</th>
+                                <th style="padding: 0.75rem; text-align: center; font-weight: 700; color: #FFD700; min-width: 120px;">الرصيد التراكمي ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody style="border-color: #1a3a5a;">
+                            <!-- البيانات سيتم ملؤها بواسطة JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 
             <!-- لوحة التكاليف التفصيلية -->
-            <div class="mt-12 sm:mt-16 animate-on-scroll">
-                <h3 class="text-2xl sm:text-3xl font-extrabold mb-6 border-b pb-2" style="color: var(--color-gold); border-color: var(--color-accent-blue);">تفاصيل النفقات الأساسية (محدثة)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-lg">
-                    <div class="p-6 rounded-lg shadow-xl" style="background-color: #102A43; border: 1px solid var(--color-gold);">
-                        <h4 class="font-bold mb-3" style="color: var(--color-gold);">تكاليف البدء الأولية (الفورية)</h4>
-                        <ul class="space-y-3" style="color: #cccccc;">
-                            <li>💻 تطوير الموقع الأولي: $800</li>
-                            <li>📢 التسويق والتصوير الأولي: $600</li>
-                            <li>💰 رأس المال التشغيلي (يشمل رواتب الشهر الأول لـ 4 موظفين): **$2000**</li>
-                            <li class="font-extrabold border-t pt-3 mt-3" style="color: var(--color-gold);">الإجمالي الفوري: **$3400**</li>
+            <div class="mt-12 sm:mt-16" style="background-color: var(--color-dark-blue); padding-top: 4rem; padding-bottom: 4rem; border-radius: 0.75rem; box-shadow: var(--shadow-deep);">
+                <h3 style="font-size: 1.875rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-accent-blue); padding-bottom: 0.5rem; color: var(--color-gold);">تفاصيل النفقات الأساسية (محدثة)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" style="font-size: 1.125rem;">
+                    <div class="p-6 rounded-xl shadow-2xl" style="background-color: var(--color-mid-navy); border: 1px solid var(--color-gold);">
+                        <h4 style="font-weight: 700; margin-bottom: 0.75rem; color: var(--color-gold);">تكاليف البدء الأولية (الفورية)</h4>
+                        <ul style="list-style: none; padding: 0; margin-top: 0.75rem; color: #cccccc;">
+                            <li style="margin-bottom: 0.5rem;">💻 تطوير الموقع الأولي: $800</li>
+                            <li style="margin-bottom: 0.5rem;">📢 التسويق والتصوير الأولي: $600</li>
+                            <li style="margin-bottom: 0.5rem;">💰 رأس المال التشغيلي (يشمل رواتب الشهر الأول لـ 4 موظفين): **$2000**</li>
+                            <li style="font-weight: 800; border-top: 1px solid #334E68; padding-top: 0.75rem; margin-top: 0.75rem; color: var(--color-gold);">الإجمالي الفوري: **$3400**</li>
                         </ul>
                     </div>
-                    <div class="p-6 rounded-lg shadow-xl" style="background-color: #102A43; border: 1px solid var(--color-gold);">
-                        <h4 class="font-bold mb-3" style="color: var(--color-gold);">التكاليف التشغيلية الشهرية (الحد الأدنى)</h4>
-                        <ul class="space-y-3" style="color: #cccccc;">
-                            <li>👥 أجور الموظفين (2 موظفين): **$200**</li>
-                            <li>🤖 اشتراك AI (الأساسي): $100</li>
-                            <li>🖥️ تكاليف مكتبية (إنترنت ومستلزمات): $80</li>
-                            <li>📈 تكاليف التسويق الشهري الثابتة: $150</li>
-                            <li>🌐 الموقع والاستضافة : **$50**</li>
-                            <li class="font-extrabold border-t pt-3 mt-3" style="color: var(--color-gold);">الإجمالي الشهري الثابت: **$580**</li>
+                    <div class="p-6 rounded-xl shadow-2xl" style="background-color: var(--color-mid-navy); border: 1px solid var(--color-gold);">
+                        <h4 style="font-weight: 700; margin-bottom: 0.75rem; color: var(--color-gold);">التكاليف التشغيلية الشهرية (الثابتة)</h4>
+                        <ul style="list-style: none; padding: 0; margin-top: 0.75rem; color: #cccccc;">
+                            <li style="margin-bottom: 0.5rem;">👥 أجور الموظفين (4 موظفين): **$200**</li>
+                            <li style="margin-bottom: 0.5rem;">🤖 اشتراك AI (الأساسي): $100</li>
+                            <li style="margin-bottom: 0.5rem;">🖥️ تكاليف مكتبية (إنترنت ومستلزمات): $80</li>
+                            <li style="margin-bottom: 0.5rem;">📈 تكاليف التسويق الشهري الثابتة: $150</li>
+                            <li style="margin-bottom: 0.5rem;">🌐 الموقع والاستضافة: $50</li>
+                            <li style="font-weight: 800; border-top: 1px solid #334E68; padding-top: 0.75rem; margin-top: 0.75rem; color: var(--color-gold);">الإجمالي الشهري الثابت: **$580**</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            
+            <!-- جدول KPIs الجديد -->
+            <div class="mt-12 sm:mt-16" style="background-color: var(--color-dark-blue); padding: 4rem 2rem; border-radius: 0.75rem; box-shadow: var(--shadow-deep);">
+                <h3 style="font-size: 1.875rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-accent-blue); padding-bottom: 0.5rem; color: var(--color-gold);">مؤشرات الأداء الرئيسية (KPIs)</h3>
+                <div class="table-container">
+                    <table style="width: 100%; border-radius: 0.5rem; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); background-color: var(--color-mid-navy); color: var(--color-text-light);">
+                        <thead>
+                            <tr style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-gold); background-color: var(--color-dark-blue);">
+                                <th style="padding: 1rem; text-align: right; font-weight: 700; min-width: 150px;">المؤشر</th>
+                                <th style="padding: 1rem; text-align: center; font-weight: 700; min-width: 100px;">الهدف السنوي (Y1)</th>
+                                <th style="padding: 1rem; text-align: center; font-weight: 700; min-width: 250px;">الأهمية الاستراتيجية</th>
+                            </tr>
+                        </thead>
+                        <tbody style="border-color: #334E68;">
+                            <tr style="transition: background-color 0.15s; border-bottom: 1px solid #334E68;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">هامش الربح الإجمالي (GPM)</td>
+                                <td style="padding: 1rem; text-align: center; color: #68D391; font-weight: 600; font-size: 0.875rem;">51% +</td>
+                                <td style="padding: 1rem; text-align: right; font-size: 0.875rem; color: #cccccc;">قياس كفاءة إدارة COGS والتسعير.</td>
+                            </tr>
+                            <tr style="transition: background-color 0.15s; border-bottom: 1px solid #334E68;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">معدل اكتساب العملاء (CAC)</td>
+                                <td style="padding: 1rem; text-align: center; color: #F6E05E; font-weight: 600; font-size: 0.875rem;">$10 - $20</td>
+                                <td style="padding: 1rem; text-align: right; font-size: 0.875rem; color: #cccccc;">قياس فعالية الحملات التسويقية وحملات المشاهير.</td>
+                            </tr>
+                            <tr style="transition: background-color 0.15s;">
+                                <td style="padding: 1rem; font-weight: 700; text-align: right; font-size: 0.875rem;">متوسط قيمة الطلب (AOV)</td>
+                                <td style="padding: 1rem; text-align: center; color: #4682B4; font-weight: 600; font-size: 0.875rem;">$18 +</td>
+                                <td style="padding: 1rem; text-align: right; font-size: 0.875rem; color: #cccccc;">قياس نجاح استراتيجية بيع المنتجات ذات الهامش المرتفع.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </section>
     
     <!-- القسم الرابع: تحليل SWOT -->
-    <section id="swot-analysis" class="py-16 sm:py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl sm:text-4xl font-black section-title text-gray-800 animate-on-scroll">3. تحليل SWOT الاستراتيجي</h2>
+    <section id="swot-analysis" class="py-16 sm:py-20 mid-section-bg">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <h2 style="font-size: 2.25rem;" class="section-title">3. تحليل SWOT الاستراتيجي</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
                 
-                <!-- نقاط القوة والفرص - تعود لعمود واحد على الهاتف -->
-                <div class="space-y-6 sm:space-y-8">
-                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl card animate-on-scroll bg-green-50 border-2 border-green-300" style="transition-delay: 0.1s;">
-                        <h3 class="text-xl sm:text-2xl font-extrabold mb-3" style="color: #14532D;">💪 نقاط القوة (Strengths)</h3>
-                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                <!-- نقاط القوة والفرص - تم تعديل الألوان لتكون داكنة -->
+                <div style="margin-bottom: 1.5rem;">
+                    <div class="swot-card shadow-2xl swot-strength" style="margin-bottom: 1.5rem; transition-delay: 0.1s;">
+                        <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem;">نقاط القوة (Strengths)</h3>
+                        <ul style="list-style: disc; padding-right: 1.5rem; margin-top: 0.5rem; font-size: 1.125rem;">
                             <li>**شراكة المصنع:** إلغاء تكاليف المعدات ورأس المال الضخم.</li>
                             <li>**الريادة التكنولوجية:** نموذج عمل (AI + تفصيل) هو الأول محلياً.</li>
                             <li>**كفاءة التكاليف:** هيكل مالي مُحسن برأس مال أولي منخفض ($3400).</li>
@@ -501,9 +819,9 @@
                         </ul>
                     </div>
                     
-                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl card animate-on-scroll bg-blue-50 border-2 border-blue-300" style="transition-delay: 0.3s;">
-                        <h3 class="text-xl sm:text-2xl font-extrabold mb-3" style="color: #1E40AF;">✨ الفرص (Opportunities)</h3>
-                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                    <div class="swot-card shadow-2xl swot-opportunity" style="transition-delay: 0.3s;">
+                        <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem;">الفرص (Opportunities)</h3>
+                        <ul style="list-style: disc; padding-right: 1.5rem; margin-top: 0.5rem; font-size: 1.125rem;">
                             <li>سوق رقمي غير مشبع بالخدمات المتكاملة.</li>
                             <li>انفتاح آفاق الدفع الإلكتروني وتحسن الأوضاع الأمنية.</li>
                             <li>إمكانية التوسع الأفقي في منتجات الطباعة المختلفة.</li>
@@ -512,20 +830,20 @@
                     </div>
                 </div>
 
-                <!-- نقاط الضعف والتهديدات - تعود لعمود واحد على الهاتف -->
-                <div class="space-y-6 sm:space-y-8">
-                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl card animate-on-scroll bg-yellow-50 border-2 border-yellow-300" style="transition-delay: 0.2s;">
-                        <h3 class="text-xl sm:text-2xl font-extrabold mb-3" style="color: #92400E;">⚠️ نقاط الضعف (Weaknesses)</h3>
-                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                <!-- نقاط الضعف والتهديدات -->
+                <div style="margin-bottom: 1.5rem;">
+                    <div class="swot-card shadow-2xl swot-weakness" style="margin-bottom: 1.5rem; transition-delay: 0.2s;">
+                        <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem;">نقاط الضعف (Weaknesses)</h3>
+                        <ul style="list-style: disc; padding-right: 1.5rem; margin-top: 0.5rem; font-size: 1.125rem;">
                             <li>الاعتماد الكلي على موثوقية الشريك (المصنع) في الإنتاج.</li>
                             <li>صعوبة بناء الثقة الأولية في منصة جديدة عبر الإنترنت.</li>
                             <li>تحدي إدارة 4 موظفين في المرحلة الأولية.</li>
                         </ul>
                     </div>
                     
-                    <div class="p-6 sm:p-8 rounded-xl shadow-2xl card animate-on-scroll bg-red-50 border-2 border-red-300" style="transition-delay: 0.4s;">
-                        <h3 class="text-xl sm:text-2xl font-extrabold mb-3" style="color: #991B1B;">🔥 التهديدات (Threats)</h3>
-                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700">
+                    <div class="swot-card shadow-2xl swot-threat" style="transition-delay: 0.4s;">
+                        <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem;">التهديدات (Threats)</h3>
+                        <ul style="list-style: disc; padding-right: 1.5rem; margin-top: 0.5rem; font-size: 1.125rem;">
                             <li>منافسة المتاجر التقليدية القائمة على ثقة العميل بالمنتج الملموس.</li>
                             <li>تقلبات سعر الصرف وتأثيرها على تكاليف التشغيل.</li>
                             <li>احتمالية تقليد نموذج العمل من قبل منافسين بعد إثبات النجاح.</li>
@@ -534,40 +852,207 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- لوحة تلخيص تخفيف المخاطر -->
+            <div class="mt-12 p-6 rounded-xl shadow-2xl" style="background-color: var(--color-dark-blue); border: 3px solid #68D391;">
+                <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.75rem; color: var(--color-gold);">خطة تخفيف المخاطر والتهديدات</h3>
+                <p style="font-size: 1.125rem; color: #cccccc;">
+                    للتغلب على نقاط الضعف والتهديدات، سنعتمد استراتيجية **التنويع والتعاقد الرسمي**: <br>
+                    1. **موثوقية الشريك:** وضع **اتفاقية مستوى خدمة (SLA)** صارمة مع المصنع، وتحديد شريك إنتاج ثانوي احتياطي. <br>
+                    2. **بناء الثقة:** التركيز على التسويق المؤثر (Influencer Marketing) وتقديم سياسات ضمان واستبدال واضحة جداً (Zero Risk Policy). <br>
+                    3. **تقلبات الصرف:** تسعير المنتج النهائي بالدولار الأمريكي مع تحديد هامش أمان (Buffer Margin) لمواجهة التغيرات الحادة في سعر الصرف.
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- القسم الخامس: الخلاصة والتوصيات (Conclusion) -->
+    <!-- القسم الخامس: خطة التوسع والمنتجات المستقبلية -->
+    <section id="expansion-plan" class="py-16 sm:py-20 dark-section-bg section-with-shadow" style="background-color: var(--color-dark-blue);">
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem;">
+            <h2 style="font-size: 2.25rem;" class="section-title">4. خطة التوسع والنمو المستقبلي</h2>
+            <p style="font-size: 1.125rem; margin-bottom: 3rem; font-weight: 400; text-align: center; color: #A9B7C7;">استراتيجية التوسع الأفقي لزيادة حصتنا في السوق واستغلال كامل الطاقة الإنتاجية.</p>
+
+            <!-- تم تعديل الأيقونات للرسمية والوضوح -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <!-- المرحلة 1: التوسع الأفقي في الأصناف -->
+                <div class="card p-6 rounded-xl shadow-2xl content-card" style="transition-delay: 0.1s; border: 2px solid var(--color-gold);">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: var(--color-gold);">إضافة أصناف جديدة (مرحلة 2)</h3>
+                    <ul style="list-style: disc; padding-right: 1.5rem; margin-top: 0.5rem; font-size: 1.125rem; color: #cccccc;">
+                        <li>**ملابس النوم (البيجامات):** منتجات ذات هامش ربح مرتفع وطلب موسمي مستقر.</li>
+                        <li>**الملابس الخارجية (الجواكيت):** تُضيف قيمة للعلامة التجارية وتزيد متوسط قيمة السلة.</li>
+                        <li>**إكسسوارات مُخصصة:** قبعات، حقائب، لزيادة خيارات الطباعة المتاحة.</li>
+                    </ul>
+                </div>
+
+                <!-- المرحلة 2: استهداف قطاعات جديدة (B2B) -->
+                <div class="card p-6 rounded-xl shadow-2xl content-card" style="transition-delay: 0.2s; border: 2px solid var(--color-gold);">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: var(--color-gold);">تفعيل B2B والشركات (مرحلة 3)</h3>
+                    <ul style="list-style: disc; padding-right: 1.5rem; margin-top: 0.5rem; font-size: 1.125rem; color: #cccccc;">
+                        <li>**ملابس موحدة:** استهداف الشركات والمقاهي والأندية لطلبات ضخمة.</li>
+                        <li>**خدمات طباعة خاصة:** توفير خدمة AI للشركات لإنشاء تصميمات علاماتها التجارية.</li>
+                        <li>**عقود سنوية:** إبرام عقود صيانة وتوريد سنوية لضمان دخل ثابت وموثوق.</li>
+                    </ul>
+                </div>
+
+                <!-- المرحلة 3: التوسع الجغرافي واللوجستي -->
+                <div class="card p-6 rounded-xl shadow-2xl content-card" style="transition-delay: 0.3s; border: 2px solid var(--color-gold);">
+                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; color: var(--color-gold);">التوسع الجغرافي (مرحلة 4)</h3>
+                    <ul style="list-style: disc; padding-right: 1.5rem; margin-top: 0.5rem; font-size: 1.125rem; color: #cccccc;">
+                        <li>**الشحن السريع:** توقيع عقود مع شركات لوجستية جديدة لتقليل وقت التسليم في المدن الرئيسية.</li>
+                        <li>**مراكز تجميع:** إنشاء نقاط تجميع صغيرة في المدن الثانوية لتقليل تكلفة التسليم النهائي.</li>
+                        <li>**التوسع الإقليمي:** دراسة أسواق التصدير المجاورة (الأردن/لبنان) بعد استقرار السوق المحلي.</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- القسم السادس: الخلاصة والتوصيات (Conclusion) -->
     <section id="conclusion" class="py-16 sm:py-24" style="background-color: var(--color-accent-blue);">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
-            <h2 class="text-4xl sm:text-5xl font-black mb-6" style="color: var(--color-gold);">الخلاصة والتوصية النهائية</h2>
-            <p class="text-xl sm:text-2xl mb-8 font-light" style="color: var(--color-text-light);">فرصة استثمارية واضحة ومُحكمة في سوق التكنولوجيا والملابس.</p>
+        <div style="max-width: 1280px; margin: auto; padding: 0 1rem; text-align: center;">
+            <h2 style="font-size: 2.25rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--color-gold);">الخلاصة والتوصية النهائية</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem; font-weight: 400; color: var(--color-text-light);">فرصة استثمارية واضحة ومُحكمة في سوق التكنولوجيا والملابس.</p>
             
-            <div class="p-8 sm:p-10 rounded-2xl shadow-2xl bg-white" style="border-bottom: 5px solid var(--color-gold);">
-                <p class="text-lg sm:text-xl leading-relaxed text-gray-700 font-medium">
-                    مشروع **BRAND X** يمثل استثماراً آمناً ونموذجاً مستداماً بفضل هيكله المالي المقتصد واستراتيجياته التسويقية الذكية. نحن على استعداد تام للانطلاق فوراً بعد تحديد الأرقام النهائية لتكلفة المنتج المباع (COGS) لإنهاء تحليل نقطة التعادل.
+            <div class="p-8 sm:p-10 rounded-2xl shadow-2xl" style="background-color: var(--color-mid-navy); border-bottom: 5px solid var(--color-gold);">
+                <p style="font-size: 1.125rem; line-height: 1.6; color: #cccccc; font-weight: 600;">
+                    مشروع **BRAND X** يمثل استثماراً آمناً ونموذجاً مستداماً بفضل هيكله المالي المقتصد واستراتيجياته التسويقية الذكية. بعد تحديد **تكلفة المنتج المباع (COGS)** بدقة، أصبحت الدراسة الآن مُكتملة، وتظهر أن نقطة التعادل يمكن الوصول إليها في <strong style="color: var(--color-gold);">الشهر 5</strong> في السيناريو المتوقع (ببيع 67 وحدة شهرياً لتغطية الثابتة).
                 </p>
-                <p class="text-2xl sm:text-3xl font-extrabold mt-6" style="color: var(--color-dark-blue);">
-                    **الخطوة التالية:** تأكيد التكاليف والانطلاق.
+                <p style="font-size: 1.5rem; font-weight: 900; margin-top: 1.5rem; color: var(--color-gold);">
+                    **الخطوة التالية:** الانطلاق والتنفيذ.
                 </p>
-                <button class="mt-8 font-extrabold py-3 sm:py-4 px-8 sm:px-10 rounded-full shadow-2xl gold-button transition duration-300 transform hover:scale-105 text-lg sm:text-xl" style="background-color: var(--color-gold); color: var(--color-dark-blue);">
-                    نحن جاهزون للاجتماع النهائي
+                <button class="gold-button" style="margin-top: 2rem; font-weight: 800; padding: 0.75rem 2.5rem; border-radius: 9999px; background-color: var(--color-gold); color: var(--color-dark-blue); font-size: 1.25rem; border: none; cursor: pointer;">
+                    نحن جاهزون للانطلاق
                 </button>
             </div>
         </div>
     </section>
 
 
-    <!-- JavaScript للرسوم البيانية والحركات -->
+    <!-- JavaScript للرسوم البيانية والحركات والتحديثات الحسابية -->
     <script>
+        
+        // ==============================================
+        //  البيانات المالية الأساسية (محدثة بناءً على مدخلات العميل)
+        // ==============================================
+        const FIXED_COST_MONTHLY = 580; // التكاليف الثابتة الشهرية الجديدة
+        const STARTUP_COSTS = 3400; // تكاليف البدء الأولية
+
+        // بيانات المنتجات وأوزانها (باستخدام متوسط النطاق لكل قيمة)
+        const PRODUCTS = [
+            // 1. تيشيرت مخصص (فردي) - (متوسط 13.5$ بيع، 5$ تكلفة، 20 وحدة)
+            { id: 'T_RETAIL', cost: 5.00, price: 13.50, units: 20 }, 
+            // 2. هودي مخصص (فردي) - (متوسط 20$ بيع، 8$ تكلفة، 25 وحدة)
+            { id: 'H_RETAIL', cost: 8.00, price: 20.00, units: 25 }, 
+            // 3. تصميم حصري - (متوسط 75$ بيع، 37.5$ تكلفة، 5 وحدات)
+            { id: 'EXCLUSIVE', cost: 37.50, price: 75.00, units: 5 },
+            // 4. الجملة والمتاجر الخاصة - (متوسط 8.75$ بيع، 6.5$ تكلفة، 35 وحدة)
+            { id: 'BULK', cost: 6.50, price: 8.75, units: 35 }, 
+        ];
+        
+        // دالة لحساب نقطة التعادل (Break-Even Point)
+        function calculateBreakEven() {
+            let totalRevenue = 0;
+            let totalCost = 0;
+            let totalUnits = 0;
+            
+            PRODUCTS.forEach(p => {
+                totalRevenue += p.price * p.units;
+                totalCost += p.cost * p.units;
+                totalUnits += p.units;
+            });
+            
+            // حساب المتوسطات الموزونة
+            const WACP = totalRevenue / totalUnits; // Weighted Average Selling Price
+            const WAVC = totalCost / totalUnits;   // Weighted Average Variable Cost
+            const WACM = WACP - WAVC;            // Weighted Average Contribution Margin
+            const GPM = (WACM / WACP) * 100; // Gross Profit Margin (as average)
+
+            // 1. نقطة التعادل الشهرية بالوحدات
+            const breakevenUnits = (WACM > 0) ? Math.ceil(FIXED_COST_MONTHLY / WACM) : 0;
+            
+            // 2. نقطة التعادل الزمنية (السيناريو المتوقع = 150 وحدة / شهر)
+            const SCENARIO_UNITS = 150; 
+            const monthlyGrossProfit = SCENARIO_UNITS * WACM;
+            const monthlyNetProfitForStartupCoverage = monthlyGrossProfit - FIXED_COST_MONTHLY;
+
+            const monthsToBreakEven = (monthlyNetProfitForStartupCoverage > 0) 
+                ? Math.ceil(STARTUP_COSTS / monthlyNetProfitForStartupCoverage) + 1 
+                : 49; 
+
+            // تحديث الأرقام في لوحة تحليل نقطة التعادل
+            const updateElement = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = text;
+            };
+            
+            updateElement('gpm', `${GPM.toFixed(0)}%`);
+            updateElement('contributionMargin', `$${WACM.toFixed(2)}`);
+            updateElement('fixedCost', `$${FIXED_COST_MONTHLY.toFixed(0)}`);
+            updateElement('breakevenUnits', `${breakevenUnits} وحدة شهرياً`);
+            updateElement('breakevenMonths', `الشهر ${monthsToBreakEven}`);
+
+
+            // تحديث السيناريوهات (المتوقع 150 وحدة)
+            const conservativeUnits = 75;
+            const consNetProfit = (conservativeUnits * WACM) - FIXED_COST_MONTHLY;
+            const consMonths = (consNetProfit > 0) ? Math.ceil(STARTUP_COSTS / consNetProfit) + 1 : 49; 
+
+            const optimisticUnits = 250;
+            const optNetProfit = (optimisticUnits * WACM) - FIXED_COST_MONTHLY;
+            const optMonths = (optNetProfit > 0) ? Math.ceil(STARTUP_COSTS / optNetProfit) + 1 : Infinity;
+
+            const updateTableData = (rowIndex, data) => {
+                const row = document.querySelector(`#financial-study table tbody tr:nth-child(${rowIndex})`);
+                if (row) {
+                    row.querySelector('td:nth-child(2)').textContent = data.units; 
+                    row.querySelector('td:nth-child(3)').textContent = `${GPM.toFixed(0)}%`; 
+                    row.querySelector('td:nth-child(4)').textContent = `الشهر ${data.months}`;
+                }
+            };
+            
+            updateTableData(1, { units: conservativeUnits, months: consMonths });
+            updateTableData(2, { units: SCENARIO_UNITS, months: monthsToBreakEven });
+            updateTableData(3, { units: optimisticUnits, months: optMonths });
+
+            // 3. ملء جدول التدفق النقدي
+            const cashFlowTableBody = document.querySelector('#cashFlowTable tbody');
+            cashFlowTableBody.innerHTML = '';
+            
+            let cumulativeCash = -STARTUP_COSTS; // نبدأ برأس المال الأولي بالسالب
+            
+            for (let month = 1; month <= 12; month++) {
+                // افتراض نمو تدريجي للوحدات المبيعة من 50% إلى 150% من SCENARIO_UNITS
+                const unitMultiplier = 0.5 + (month / 12) * 1.5; // يبدأ من 0.5 وينمو حتى 2.0
+                const unitsSold = Math.round(SCENARIO_UNITS * unitMultiplier);
+                
+                const revenue = unitsSold * WACP;
+                const variableCost = unitsSold * WAVC;
+                const netProfit = revenue - variableCost - FIXED_COST_MONTHLY;
+                cumulativeCash += netProfit;
+
+                const row = document.createElement('tr');
+                row.style.cssText = `transition: background-color ${month * 0.05}s; border-bottom: 1px solid #1a3a5a; ${cumulativeCash >= 0 ? 'background-color: #0d2847;' : ''}`;
+
+                row.innerHTML = `
+                    <td style="padding: 0.75rem; text-align: center; font-weight: 700; font-size: 0.875rem;">${month}</td>
+                    <td style="padding: 0.75rem; text-align: center; font-size: 0.875rem;">${unitsSold}</td>
+                    <td style="padding: 0.75rem; text-align: center; font-size: 0.875rem;">$${revenue.toFixed(0)}</td>
+                    <td style="padding: 0.75rem; text-align: center; color: #F87171; font-size: 0.875rem;">$${variableCost.toFixed(0)}</td>
+                    <td style="padding: 0.75rem; text-align: center; color: #F87171; font-size: 0.875rem;">$${FIXED_COST_MONTHLY.toFixed(0)}</td>
+                    <td style="padding: 0.75rem; text-align: center; font-weight: 700; color: ${netProfit >= 0 ? '#68D391' : '#F87171'}; font-size: 0.875rem;">$${netProfit.toFixed(0)}</td>
+                    <td style="padding: 0.75rem; text-align: center; font-weight: 800; color: ${cumulativeCash >= 0 ? 'var(--color-gold)' : '#F87171'}; font-size: 0.875rem;">$${cumulativeCash.toFixed(0)}</td>
+                `;
+                cashFlowTableBody.appendChild(row);
+            }
+        }
+        
         // دالة عرض الرسوم البيانية (Chart.js)
         function renderCharts() {
-            // الألوان المخصصة للرسوم البيانية
             const primaryColor = '#FFD700'; // Gold
             const secondaryColor = '#4682B4'; // Accent Blue
             const tertiaryColor = '#0A192F'; // Dark Blue
 
-            // بيانات التكاليف الأولية (مرة واحدة)
             const startupData = {
                 labels: ['تطوير الموقع', 'التسويق الأولي', 'رأس المال التشغيلي'],
                 datasets: [{
@@ -578,95 +1063,68 @@
                 }]
             };
 
-            // بيانات التكاليف التشغيلية (شهرية)
             const monthlyData = {
-                labels: ['أجور الموظفين', 'اشتراك AI', 'تكاليف مكتبية', 'تسويق شهري'],
+                labels: ['أجور الموظفين', 'اشتراك AI', 'تكاليف مكتبية', 'تسويق شهري', 'الموقع والاستضافة'], 
                 datasets: [{
                     label: 'التكلفة الشهرية بالدولار الأمريكي ($)',
-                    data: [400, 120, 80, 200],
-                    backgroundColor: [primaryColor, secondaryColor, tertiaryColor, '#A9B7C7'],
+                    data: [200, 100, 80, 150, 50],
+                    backgroundColor: [primaryColor, secondaryColor, tertiaryColor, '#A9B7C7', '#B0C4DE'],
                     hoverOffset: 4
                 }]
             };
 
-            // خيارات الرسوم البيانية
             const options = {
                 responsive: true,
                 maintainAspectRatio: true, 
                 plugins: {
                     legend: {
                         position: 'top',
-                        labels: {
-                            font: { family: 'Cairo' },
-                            color: 'white' 
-                        }
+                        labels: { font: { family: 'Cairo' }, color: 'white' }
                     },
-                    tooltip: {
-                        titleFont: { family: 'Cairo' },
-                        bodyFont: { family: 'Cairo' }
+                    tooltip: { titleFont: { family: 'Cairo' }, bodyFont: { family: 'Cairo' } }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.15)' },
+                        ticks: { color: '#F8F8FF', font: { family: 'Cairo' } }
+                    },
+                    x: { 
+                        ticks: { font: { family: 'Cairo' }, color: '#F8F8FF' },
+                        grid: { display: false }
                     }
                 }
             };
 
-            // رسم بياني دائري للتكاليف الأولية
-            new Chart(document.getElementById('startupChart'), {
-                type: 'doughnut',
-                data: startupData,
-                options: options
-            });
-
-            // رسم بياني شريطي للتكاليف التشغيلية
-            new Chart(document.getElementById('monthlyChart'), {
-                type: 'bar',
-                data: monthlyData,
-                options: {
-                    ...options,
-                    scales: {
-                        y: { 
-                            beginAtZero: true,
-                            grid: { color: 'rgba(255, 255, 255, 0.15)' },
-                            ticks: { color: '#F8F8FF' }
-                        },
-                        x: { 
-                            ticks: { 
-                                font: { family: 'Cairo' },
-                                color: '#F8F8FF'
-                            },
-                            grid: { display: false }
-                        }
-                    }
-                }
-            });
+            new Chart(document.getElementById('startupChart'), { type: 'doughnut', data: startupData, options: options });
+            new Chart(document.getElementById('monthlyChart'), { type: 'bar', data: monthlyData, options: options });
         }
         
         // دالة مراقبة التمرير للحركات وشريط التقدم
         function checkScroll() {
-            // 1. الحركات التفاعلية (Animation)
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            elements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                // إذا كان العنصر ضمن مجال الرؤية
-                if (rect.top < window.innerHeight - 100 && rect.bottom > 100) {
-                    el.classList.add('in-view');
-                } else {
-                    el.classList.remove('in-view');
-                }
-            });
-
-            // 2. شريط التقدم (Progress Bar)
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
+            const scrolled = (height > 0) ? (winScroll / height) * 100 : 0;
+            
+            const progressBar = document.getElementById("progress-bar");
+            if (progressBar) {
+                 progressBar.style.width = scrolled + "%";
+            }
+           
         }
 
         // تشغيل الرسوم البيانية والحركات عند تحميل الصفحة
         window.onload = function() {
+            // محاولة تحميل CSS وخطوط Chart.js لضمان الوضوح
+            const script = document.createElement('script');
+            script.src = "https://cdn.tailwindcss.com";
+            document.head.appendChild(script);
+
+            calculateBreakEven();
             renderCharts();
-            checkScroll(); // تشغيل أولي
-            window.addEventListener('scroll', checkScroll); // مراقبة التمرير
+            checkScroll(); 
+            window.addEventListener('scroll', checkScroll);
         };
     </script>
 </body>
 </html>
-
